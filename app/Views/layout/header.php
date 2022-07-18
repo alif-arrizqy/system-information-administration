@@ -61,7 +61,7 @@
 							<!-- <a class="dropdown-item" href="#"><i class="ti-settings text-muted mr-2"></i>
 								Settings</a> -->
 							<!-- <div class="dropdown-divider"></div> -->
-							<a class="dropdown-item" href="#"><i class="ti-lock text-muted mr-2"></i>
+							<a class="dropdown-item" href="<?=base_url ('login/logout') ?>"><i class="ti-lock text-muted mr-2"></i>
 								Logout</a>
 						</li>
 					</ul>

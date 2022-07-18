@@ -6,11 +6,10 @@ use CodeIgniter\Model;
 
 class loginModel extends Model
 {
-    public function cek_login($username, $password)
-    {
-        return $this->db->table('users')->where(array('username' => $username, 'password' => $password))
-            ->get()->getRowArray();
-    }
+    // cek login
+    protected $table = 'users';
+    protected $allowedFields = ['id_user', 'username', 'password', 'fullname', 'status', 'id_lembaga'];
+
     
     public function cek_status($status)
     {

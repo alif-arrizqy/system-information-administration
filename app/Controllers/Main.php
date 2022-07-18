@@ -5,45 +5,60 @@ namespace App\Controllers;
 
 date_default_timezone_set("Asia/Jakarta");
 
+use App\Models\mainModel;
 
 class Main extends BaseController
 {
-  public function __construct()
-  {
-    helper('form');
-  }
+    protected $mainModel;
 
-  public function index()
-  {
-    return view('pages/index');
-  }
+    public function __construct()
+    {
+      $this->mainModel = new mainModel();
+      helper('form');
+    }
 
-  // proposal
-  public function submit_proposal()
-  {
-    return view('pages/dokumen_proposal/submit_proposal');
-  }
+    public function index()
+    {
+      if (session()->get('username') == '') {
+        session()->setFlashdata('gagal', 'Anda belum login !');
+        return redirect()->to(base_url('/Login'));
+      }
+      
+      $data['get_lembaga'] = $this->mainModel->get_lembaga();
+      return view('pages/index', $data);
+    }
 
-  public function list_proposal()
-  {
-    return view('pages/dokumen_proposal/list_proposal');
-  }
-  
-  public function approve_proposal()
-  {
-    return view('pages/dokumen_proposal/approve_proposal');
-  }
+    // proposal
+    public function submit_proposal()
+    {
+      return view('pages/dokumen_proposal/submit_proposal');
+    }
 
-  // laporan hasil kegiatan
-  public function submit_laporan_hasil_kegiatan()
-  {
-    return view('pages/laporan_hasil_kegiatan/submit_laporan_hasil_kegiatan');
-  }
+    public function list_proposal()
+    {
+      return view('pages/dokumen_proposal/list_proposal');
+    }
+    
+    public function approve_proposal()
+    {
+      if (session()->get('username') == '') {
+        session()->setFlashdata('gagal', 'Anda belum login !');
+        return redirect()->to(base_url('/Login'));
+      }
+      
+      return view('pages/dokumen_proposal/approve_proposal');
+    }
 
-  public function list_laporan_hasil_kegiatan()
-  {
-    return view('pages/laporan_hasil_kegiatan/list_laporan_hasil_kegiatan');
-  }
+    // laporan hasil kegiatan
+    public function submit_laporan_hasil_kegiatan()
+    {
+      return view('pages/laporan_hasil_kegiatan/submit_laporan_hasil_kegiatan');
+    }
+
+    public function list_laporan_hasil_kegiatan()
+    {
+      return view('pages/laporan_hasil_kegiatan/list_laporan_hasil_kegiatan');
+    }
 
   // persuratan
   public function submit_surat()

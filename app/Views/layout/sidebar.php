@@ -1,3 +1,10 @@
+<?php
+    foreach($get_lembaga->getResult() as $rs) {
+        $id_lembaga = $rs->id_lembaga;
+        $nama_lembaga = $rs->nama_lembaga;
+        $tingkat_lembaga = $rs->tingkat_lembaga;
+    }
+?>
 <section class="sidebar position-relative">
     <div class="user-profile px-20 py-15">
         <div class="d-flex align-items-center">
@@ -5,23 +12,15 @@
                 <img src="<?= base_url('public/assets/images/avatar/avatar-13.png') ?>" class="avatar avatar-lg bg-primary-light" alt="User Image">
             </div>
             <div class="info">
-                <a class="dropdown-toggle px-20" data-toggle="dropdown" href="#">Himakom</a>
+                <a class="dropdown-toggle px-20" data-toggle="dropdown" href="#"><?= $nama_lembaga?></a>
                 <div class="dropdown-menu">
-                    <!-- <a class="dropdown-item" href="#"><i class="ti-user"></i> Profile</a> -->
-                    <!-- <a class="dropdown-item" href="#"><i class="ti-email"></i> Inbox</a> -->
-                    <!-- <a class="dropdown-item" href="#"><i class="ti-link"></i> Connections</a> -->
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><i class="ti-shift-right"></i> Logout</a>
+                    <a class="dropdown-item" href="<?= base_url('login/logout') ?>"><i class="ti-shift-right"></i> Logout</a>
                 </div>
             </div>
         </div>
-        <!-- <ul class="list-inline profile-setting mt-30 mb-20 d-flex justify-content-between"> -->
-        <!-- <li><a href="#" data-toggle="tooltip" data-placement="top" title="Search"><i data-feather="search"></i></a></li> -->
-        <!-- <li><a href="#" data-toggle="tooltip" data-placement="top" title="Notification"><i data-feather="bell"></i></a></li> -->
-        <!-- <li><a href="#" data-toggle="tooltip" data-placement="top" title="Chat"><i data-feather="message-square"></i></a></li> -->
-        <!-- <li><a href="#" data-toggle="tooltip" data-placement="top" title="Logout"><i data-feather="log-out"></i></a></li> -->
-        <!-- </ul> -->
     </div>
+    <?php if(session()->get('status') == 0) { ?>
     <div class="multinav">
         <div class="multinav-scroll" style="height: 100%;">
             <!-- sidebar menu-->
@@ -42,9 +41,6 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <!-- USER -->
-                        <li><a href="<?= base_url('/submit_proposal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Proposal</a></li>
-                        <li><a href="<?= base_url('/list_proposal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Proposal</a></li>
                         <!-- ADMIN -->
                         <li><a href="<?= base_url('/approve_proposal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Approve Proposal</a></li>
                     </ul>
@@ -59,27 +55,8 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <!-- USER -->
-                        <li><a href="<?= base_url('/submit_surat') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Surat</a></li>
                         <!-- ADMIN DAN USER -->
                         <li><a href="<?= base_url('/list_surat_masuk') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Surat Masuk</a></li>
-                        <!-- USER -->
-                        <li><a href="<?= base_url('/list_surat_keluar') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Surat Keluar</a></li>
-                    </ul>
-                </li>
-                <!-- USER -->
-                <li class="header">Laporan Kegiatan</li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="icon-Book-open"><span class="path1"></span><span class="path2"></span></i>
-                        <span>Laporan Kegiatan</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-right pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?= base_url('/submit_laporan_hasil_kegiatan') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Laporan</a></li>
-                        <li><a href="<?= base_url('/list_laporan_hasil_kegiatan') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Laporan</a></li>
                     </ul>
                 </li>
                 <!-- ADMIN -->
@@ -128,4 +105,67 @@
             </ul>
         </div>
     </div>
+    <?php } if (session()->get('status') == 1) { ?>
+    <div class="multinav">
+        <div class="multinav-scroll" style="height: 100%;">
+            <!-- sidebar menu-->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="treeview-menu">
+                <li>
+                    <a href="<?= base_url('/') ?>"><i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Dashboard</span>
+                </li>
+                </li>
+                <li class="header">Proposal </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Write"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Dokumen Proposal</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <!-- USER -->
+                        <li><a href="<?= base_url('/submit_proposal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Proposal</a></li>
+                        <li><a href="<?= base_url('/list_proposal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Proposal</a></li>
+                    </ul>
+                </li>
+                <li class="header">Surat </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Mail"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Persuratan</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <!-- USER -->
+                        <li><a href="<?= base_url('/submit_surat') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Surat</a></li>
+                        <!-- ADMIN DAN USER -->
+                        <li><a href="<?= base_url('/list_surat_masuk') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Surat Masuk</a></li>
+                        <!-- USER -->
+                        <li><a href="<?= base_url('/list_surat_keluar') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Surat Keluar</a></li>
+                    </ul>
+                </li>
+                <!-- USER -->
+                <li class="header">Laporan Kegiatan</li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Book-open"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Laporan Kegiatan</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/submit_laporan_hasil_kegiatan') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Laporan</a></li>
+                        <li><a href="<?= base_url('/list_laporan_hasil_kegiatan') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Laporan</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <?php } ?>
 </section>

@@ -38,31 +38,31 @@ $routes->get('Login', 'Login::index');
 
 // User
 // Main
-$routes->get('/Home', 'Main::index');
+$routes->get('/Home', 'Main::index', ['filter' => 'auth']);
 
 // proposal
-$routes->get('/submit_proposal', 'Main::submit_proposal');
-$routes->get('/list_proposal', 'Main::list_proposal');
-$routes->get('/approve_proposal', 'Main::approve_proposal');
+$routes->get('/submit_proposal', 'Main::submit_proposal', ['filter' => 'auth']);
+$routes->get('/list_proposal', 'Main::list_proposal', ['filter' => 'auth']);
+$routes->get('/approve_proposal', 'Main::approve_proposal', ['filter' => 'auth']);
 
 // laporan_hasil_kegiatan
-$routes->get('/submit_laporan_hasil_kegiatan', 'Main::submit_laporan_hasil_kegiatan');
-$routes->get('/list_laporan_hasil_kegiatan', 'Main::list_laporan_hasil_kegiatan');
+$routes->get('/submit_laporan_hasil_kegiatan', 'Main::submit_laporan_hasil_kegiatan', ['filter' => 'auth']);
+$routes->get('/list_laporan_hasil_kegiatan', 'Main::list_laporan_hasil_kegiatan', ['filter' => 'auth']);
 
 // persuratan
-$routes->get('/submit_surat', 'Main::submit_surat');
-$routes->get('/list_surat_masuk', 'Main::list_surat_masuk');
-$routes->get('/list_surat_keluar', 'Main::list_surat_keluar');
+$routes->get('/submit_surat', 'Main::submit_surat', ['filter' => 'auth']);
+$routes->get('/list_surat_masuk', 'Main::list_surat_masuk', ['filter' => 'auth']);
+$routes->get('/list_surat_keluar', 'Main::list_surat_keluar', ['filter' => 'auth']);
 
 // pelaksanaan
-$routes->get('/realisasi_kegiatan', 'Main::realisasi_kegiatan');
-$routes->get('/detail_realisasi_kegiatan', 'Main::detail_realisasi_kegiatan');
+$routes->get('/realisasi_kegiatan', 'Main::realisasi_kegiatan', ['filter' => 'auth']);
+$routes->get('/detail_realisasi_kegiatan', 'Main::detail_realisasi_kegiatan', ['filter' => 'auth']);
 
 // manajemen user
-$routes->get('/list_admin', 'Main::list_admin');
-$routes->get('/add_admin', 'Main::add_admin');
-$routes->get('/list_user', 'Main::list_user');
-$routes->get('/add_user', 'Main::add_user');
+$routes->get('/list_admin', 'Main::list_admin', ['filter' => 'auth']);
+$routes->get('/add_admin', 'Main::add_admin', ['filter' => 'auth']);
+$routes->get('/list_user', 'Main::list_user', ['filter' => 'auth']);
+$routes->get('/add_user', 'Main::add_user', ['filter' => 'auth']);
 
 
 

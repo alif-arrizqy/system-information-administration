@@ -13,7 +13,7 @@ class Login extends BaseController
 	protected $loginModel;
   public function __construct()
   {
-		$this->loginModel = new loginModel();
+	$this->loginModel = new loginModel();
     helper('form');
   }
 

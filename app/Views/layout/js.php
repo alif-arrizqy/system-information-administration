@@ -16,5 +16,9 @@
 <script type="text/javascript" src="<?= base_url('public/assets/vendor_components/datatable/datatables.min.js') ?>"></script>
 
 <!-- select2 -->
-<script type="text/javascript" src="<?= base_url('public/assets/main/js/pages/select2.js') ?>"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="text/javascript" src="<?= base_url('public/assets/vendor_components/select2/dist/js/select2.full.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('public/assets/main/js/pages/advanced-form-element.js') ?>"></script>
+
+<!-- validation form -->
+<script type="text/javascript" src="<?= base_url('public/assets/main/js/pages/validation.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('public/assets/main/js/pages/form-validation.js') ?>"></script>

@@ -2,6 +2,9 @@
 # Operating Specific Junk Files
 #-------------------------
 
+# pdf
+*.pdf
+
 # OS X
 .DS_Store
 .AppleDouble

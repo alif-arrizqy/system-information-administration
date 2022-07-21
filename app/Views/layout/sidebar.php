@@ -27,7 +27,7 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="treeview-menu">
                 <li>
-                    <a href="<?= base_url('/') ?>"><i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+                    <a href="<?= base_url('Home') ?>"><i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
                         <span>Dashboard</span>
                 </li>
                 </li>
@@ -112,7 +112,7 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="treeview-menu">
                 <li>
-                    <a href="<?= base_url('/') ?>"><i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+                    <a href="<?= base_url('Home') ?>"><i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
                         <span>Dashboard</span>
                 </li>
                 </li>

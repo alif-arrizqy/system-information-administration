@@ -54,13 +54,8 @@ class Login extends BaseController
 
   public function logout()
 	{
-		session()->remove('id_user');
-		session()->remove('username');
-		session()->remove('fullname');
-		session()->remove('password');
-		session()->remove('status');
-		session()->remove('id_lembaga');
-
+		$session = session();
+		$session->destroy();
 		session()->setFlashdata('sukses', 'Anda telah berhasil logout');
 		return redirect()->to(base_url('Login'));
 	}

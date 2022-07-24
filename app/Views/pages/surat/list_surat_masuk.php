@@ -5,6 +5,17 @@
 	<div class="row">
 		<div class="col-lg-12 col-12">
 			<div class="box">
+				<!-- alert -->
+				<?php if (!empty(session()->getFlashdata('sukses'))) { ?>
+					<div class="alert alert-success">
+						<?php echo session()->getFlashdata('sukses') ?>
+					</div>
+				<?php } ?>
+				<?php if (!empty(session()->getFlashdata('gagal'))) { ?>
+					<div class="alert alert-danger">
+						<?php echo session()->getFlashdata('gagal') ?>
+					</div>
+				<?php } ?>
 				<div class="box-header with-border">
 					<h3 class="box-title">Data Surat Masuk</h3>
 				</div>
@@ -18,23 +29,45 @@
 									<th>Nomor Surat</th>
 									<th>Tanggal Surat</th>
 									<th>Nama Pengirim</th>
-									<th>Jabatan</th>
 									<th>Instansi</th>
-									<th>Perihal</th>
+									<th>Status</th>
 									<th>File</th>
 								</tr>
 							</thead>
 							<tbody>
+								<?php
+								$no = 1;
+								foreach($surat_masuk as $rs) {
+									if ($rs['status'] == 0){
+										// $status_surat = "<span class='label label-warning'>unread</span>";
+										$status_surat = "<span class='label label-warning'>
+											<a href='".base_url('/Main/status_baca/'.$rs['id_surat'])."' style='color:white'>unread</a>
+											</span>";
+									} else if ($rs['status'] == 1){
+										$status_surat = "<span class='label label-primary'>read</span>";
+									}
+
+								$db = \Config\Database::connect();
+								$query = $db->query("SELECT nama_lembaga FROM lembaga WHERE id_lembaga = '$rs[id_lembaga]'");
+								foreach($query->getResultArray() as $qr) {
+									$nama_lembaga = $qr['nama_lembaga'];
+								}
+								?>
 								<tr>
-									<td>1</td>
-									<td>27/XYZ/2019</td>
-									<td>20 Juni 2022</td>
-									<td>Atik Medixa</td>
-									<td>Staff</td>
-									<td>Dirmawa</td>
-									<td>Pengajuan dana untuk ITC</td>
-									<td>Surat Pengajuan Dana.pdf</td>
+									<td><center><?=$no++?></center></td>
+									<td><center><?=$rs['no_surat']?></center></td>
+									<td><center><?=$rs['tanggal_surat']?></center></td>
+									<td><center><?=$rs['nama_pengirim']?></center></td>
+									<td><center><?=$nama_lembaga?></center></td>
+									<td><center><?=$status_surat?></center></td>
+									<td><center>
+										<a href="<?= base_url('Main/download_surat/'.$rs['id_surat']) ?>">
+											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg" alt="<?= $rs['file'] ?>">
+										</a>
+										</center>
+									</td>
 								</tr>
+								<?php }?>
 							</tbody>
 						</table>
 					</div>

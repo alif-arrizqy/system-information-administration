@@ -59,8 +59,8 @@
 									<td><center>Rp<?= number_format($rs['pengajuan_anggaran']) ?></center></td>
 									<td><center>Rp<?= number_format($rs['anggaran_diterima']) ?></center></td>
 									<td><center>
-										<a href="<?= base_url('Main/download/'.$rs['id_proposal']) ?>">
-											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg" alt="<?= $rs['file'] ?>">
+										<a href="<?= base_url('Main/download_proposal/'.$rs['id_proposal']) ?>">
+											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg" title="<?= $rs['judul_kegiatan']?>" alt="<?= $rs['file'] ?>">
 										</a>
 									</center></td>
 									<td><center><?= $approve ?></center></td>

@@ -6,7 +6,7 @@
         <div class="col-lg-12 col-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Form Submit Proposal</h4>
+                    <h4 class="box-title text-info"><i class="ti-book mr-15"></i> Submit Proposal</h4>
                 </div>
                 <!-- /.box-header -->
                 <?php
@@ -30,8 +30,6 @@
                 <form novalidate class="form" action="<?= base_url('/Main/save_proposal') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="box-body">
-                        <h4 class="box-title text-info"><i class="ti-book mr-15"></i> Submit Proposal</h4>
-                        <hr class="my-15">
                         <div class="form-group">
                             <label>Judul Kegiatan</label>
                             <div class="controls">
@@ -39,12 +37,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Instansi</label>
-                            <input type="text" class="form-control" placeholder="Nama Instansi" value="<?= $nama_lembaga?>" readonly>
-                            <input type="hidden" class="form-control" name="id_lembaga" placeholder="Nama Instansi" value="<?= $id_lembaga?>">
+                            <label>Lembaga</label>
+                            <input type="text" class="form-control" placeholder="Nama Lembaga" value="<?= $nama_lembaga?>" readonly>
+                            <input type="hidden" class="form-control" name="id_lembaga" value="<?= $id_lembaga?>">
                         </div>
                         <div class="form-group">
-                            <label>pengajuan Anggaran</label>
+                            <label>Pengajuan Anggaran</label>
                             <div class="controls">
                                 <div class="input-group"> <span class="input-group-addon">Rp</span>
                                 <input type="text" class="form-control" name="pengajuan_anggaran" placeholder="Anggaran yang di ajukan" required onKeyPress="return numbersonly(this, event)" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" >
@@ -64,10 +62,10 @@
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <button type="button" class="btn btn-rounded btn-warning btn-outline mr-1">
-                            <i class="ti-trash"></i> Cancel
+                            <i class="ti-trash"></i> Batal
                         </button>
                         <button type="submit" class="btn btn-rounded btn-primary btn-outline">
-                            <i class="ti-save-alt"></i> Save
+                            <i class="ti-save-alt"></i> Simpan
                         </button>
                     </div>
                 </form>

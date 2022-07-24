@@ -8,6 +8,17 @@
 				<div class="box-header with-border">
 					<h3 class="box-title">Data Surat Keluar</h3>
 				</div>
+				<!-- alert -->
+				<?php if (!empty(session()->getFlashdata('sukses'))) { ?>
+					<div class="alert alert-success">
+						<?php echo session()->getFlashdata('sukses') ?>
+					</div>
+				<?php } ?>
+				<?php if (!empty(session()->getFlashdata('gagal'))) { ?>
+					<div class="alert alert-danger">
+						<?php echo session()->getFlashdata('gagal') ?>
+					</div>
+				<?php } ?>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<div class="table-responsive">
@@ -17,35 +28,51 @@
 									<th>No</th>
 									<th>Nomor Surat</th>
 									<th>Tanggal Surat</th>
-									<th>Nama Pengirim</th>
-									<th>Jabatan</th>
-									<th>Instansi</th>
-									<th>Perihal</th>
+									<th>Nama Penerima</th>
+									<th>Lembaga Penerima</th>
+									<th>Status</th>
 									<th>File</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
+								<?php
+								$no = 1;
+								foreach($surat_keluar as $rs) {
+									if ($rs['status'] == 0){
+										$status_surat = "<span class='label label-warning'>unread</span>";
+									} else if ($rs['status'] == 1){
+										$status_surat = "<span class='label label-primary'>read</span>";
+									}
+
+								$db = \Config\Database::connect();
+								$query = $db->query("SELECT nama_lembaga FROM lembaga WHERE id_lembaga = '$rs[lembaga_penerima]'");
+								foreach($query->getResultArray() as $qr) {
+									$nama_lembaga = $qr['nama_lembaga'];
+								}
+								?>
 								<tr>
-									<td>1</td>
-									<td>27/XYZ/2019</td>
-									<td>20 April 2022</td>
-									<td>Gozali</td>
-									<td>Ketua Himpunan</td>
-									<td>Himakom</td>
-									<td>Pengajuan dana untuk ITC</td>
-									<td>Surat Pengajuan Dana.pdf</td>
+									<td><center><?=$no++?></center></td>
+									<td><center><?=$rs['no_surat']?></center></td>
+									<td><center><?=$rs['tanggal_surat']?></center></td>
+									<td><center><?=$rs['nama_penerima']?></center></td>
+									<td><center><?=$nama_lembaga?></center></td>
+									<td><center><?=$status_surat?></center></td>
+									<td><center>
+										<a href="<?= base_url('Main/download_surat/'.$rs['id_surat']) ?>">
+											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg" alt="<?= $rs['file'] ?>">
+										</a>
+										</center>
+									</td>
 									<td>
 										<center>
-											<button type="button" class="btn btn-warning" title="Hapus Data" data-toggle="modal" data-target="#hapusModal">
+											<button type="button" class="btn btn-warning" title="Hapus Data" data-toggle="modal" data-target="#hapusModal<?=$rs['id_surat']?>">
 												<i class="fa fa-trash"></i>
-											</button>
-											<button type="button" class="btn btn-success" title="Edit Data" data-toggle="modal" data-target="#editModal">
-												<i class="fa fa-edit"></i>
 											</button>
 										</center>
 									</td>
 								</tr>
+								<?php }?>
 							</tbody>
 						</table>
 					</div>
@@ -58,7 +85,8 @@
 </section>
 
 <!-- Modal Delete -->
-<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php foreach($surat_keluar as $rs) { ?>
+<div class="modal fade" id="hapusModal<?=$rs['id_surat']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -67,9 +95,10 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+			<?php echo form_open('/Main/delete_surat' . '/' . $rs['id_surat']) ?>
 			<div class="modal-body">
 				<p>Hapus Data Terpilih ? </p>
-
+				<input type="hidden" name="file" value="<?= $rs['file'] ?>">
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -79,6 +108,7 @@
 		</div>
 	</div>
 </div>
+<?php }?>
 
 <!-- Modal Edit -->
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

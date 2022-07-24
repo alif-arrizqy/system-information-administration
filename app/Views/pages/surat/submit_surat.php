@@ -6,54 +6,141 @@
         <div class="col-lg-12 col-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h4 class="box-title">Form Submit Surat</h4>
+                    <h4 class="box-title text-info"><i class="ti-email mr-15"></i> Submit Surat</h4>
                 </div>
                 <!-- /.box-header -->
-                <form class="form">
+                <?php
+                foreach ($get_lembaga->getResult() as $rs){
+                    $id_lembaga = $rs->id_lembaga;
+                    $nama_lembaga = $rs->nama_lembaga;
+                    $tingkat_lembaga = $rs->tingkat_lembaga;
+                }
+                ?>
+                <!-- alert -->
+                <?php if (!empty(session()->getFlashdata('gagal'))) { ?>
+                        <div class="alert alert-danger">
+                            <?php echo session()->getFlashdata('gagal') ?>
+                        </div>
+                    <?php } ?>
+                    <?php if (!empty(session()->getFlashdata('sukses'))) { ?>
+                        <div class="alert alert-success">
+                            <?php echo session()->getFlashdata('sukses') ?>
+                        </div>
+                <?php } ?>
+                <form novalidate class="form" action="<?= base_url('/Main/save_surat') ?>" method="post" enctype="multipart/form-data">
+                    <?= csrf_field(); ?>
                     <div class="box-body">
-                        <h4 class="box-title text-info"><i class="ti-email mr-15"></i> Submit Surat</h4>
+                        <h4 class="box-title text-info"><i class="ti-user mr-15"></i> Identitas Surat</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="controls">
+                                <label>Nomor Surat</label>
+                                <input type="text" class="form-control" required name="no_surat" placeholder="Nomor Surat">
+                                <input type="hidden" class="form-control" name="id_lembaga" value="<?= $id_lembaga?>">
+                            </div>
+                            </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <div class="controls">
+                                    <label>Tanggal Surat</label>
+                                    <input type="date" class="form-control" name="tgl_surat" required placeholder="Tanggal Surat">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label for="wLocation1"> Jenis Surat : <span class="danger">*</span> </label>
+                                    <select class="form-control select2" required id="wLocation1" name="jenis_surat" style="width: 100%;">
+                                        <option value="0">Surat Undangan</option>
+                                        <option value="1">Surat Tugas</option>
+                                        <option value="2">Surat Keputusan</option>
+                                        <option value="3">Surat Permohonan</option>
+                                    </select>
+                                </div>    
+                            </div>    
+                            </div>
+                        </div>
                         <hr class="my-15">
-                        <div class="form-group">
-                            <label>Nomor Surat</label>
-                            <input type="text" class="form-control" name="no_surat" placeholder="contoh: 27/HMS/001/2019">
+                        <h4 class="box-title text-info"><i class="ti-save mr-15"></i> Identitas Penerima</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="controls">
+                                <label for="jobTitle3">Nama Penerima :</label>
+                                <input type="text" class="form-control" required id="jobTitle3" placeholder="Nama Penerima" name="nama_penerima">
+                            </div>
+                            </div>
+                            </div>
+                            <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label for="behName3">Lembaga Penerima :</label>
+                                    <select class="form-control select2" required id="behName3" name="lembaga_penerima" style="width: 100%;">
+                                        <?php foreach($get_all_lembaga as $rs) {?>
+                                            <option value="<?= $rs['id_lembaga'] ?>"><?= $rs['nama_lembaga'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Tanggal Surat</label>
-                            <input type="text" class="form-control" name="pengajuan_anggaran" placeholder="format: 01/04/2019">
+                        <hr class="my-15">
+                        <h4 class="box-title text-info"><i class="ti-save mr-15"></i> Identitas Pengirim</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <div class="controls">
+                                    <label for="wint1">Nama Pengirim :</label>
+                                    <input type="text" class="form-control" required id="wint1" placeholder="Nama Pengirim" name="nama_pengirim">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <div class="controls">
+                                    <label for="wjobTitle4">Jabatan Pengirim :</label>
+                                    <input type="text" class="form-control" required id="wjobTitle4" name="jabatan">
+                                </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Nama Pengirim</label>
-                            <input type="text" class="form-control" name="pengajuan_anggaran" placeholder="Nama pengirim surat">
+                        <hr class="my-15">
+                        <h4 class="box-title text-info"><i class="ti-save mr-15"></i> Submit Surat</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <label>Upload Surat</label>
+                                    <div class="col-lg-10">
+                                        <div class="custom-file">
+                                            <label class="file">
+                                                <input type="file" required id="file" name="file">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="shortDescription3">Perihal :</label>
+                                <textarea name="perihal" id="shortDescription3" rows="6" class="form-control"></textarea>
+                            </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Jabatan</label>
-                            <input type="text" class="form-control" name="pengajuan_anggaran" placeholder="Jabatan pengirim surat">
-                        </div>
-                        <div class="form-group">
-                            <label>Instansi</label>
-                            <input type="text" class="form-control" name="pengajuan_anggaran" placeholder="Instansi pengirim surat">
-                        </div>
-                        <div class="form-group">
-                            <label>Perihal</label>
-                            <textarea type="text" class="form-control" name="pengajuan_anggaran" placeholder="Perihal pengirim surat"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Upload Surat</label>
-                            <label class="file">
-                                <input type="file" id="file" name="file">
-                            </label>
-                        </div>
-
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <button type="button" class="btn btn-rounded btn-warning btn-outline mr-1">
-                            <i class="ti-trash"></i> Cancel
+                            <i class="ti-trash"></i> Batal
                         </button>
                         <button type="submit" class="btn btn-rounded btn-primary btn-outline">
-                            <i class="ti-save-alt"></i> Save
+                            <i class="ti-save-alt"></i> Simpan
                         </button>
-                    </div>
+                    </div>  
                 </form>
             </div>
             <!-- /.box -->

@@ -55,8 +55,12 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
+                        <!-- USER -->
+                        <li><a href="<?= base_url('/submit_surat') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Surat</a></li>
                         <!-- ADMIN DAN USER -->
                         <li><a href="<?= base_url('/list_surat_masuk') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Surat Masuk</a></li>
+                        <!-- USER -->
+                        <li><a href="<?= base_url('/list_surat_keluar') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Surat Keluar</a></li>
                     </ul>
                 </li>
                 <!-- ADMIN -->

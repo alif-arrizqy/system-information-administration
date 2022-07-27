@@ -16,17 +16,6 @@
                     $tingkat_lembaga = $rs->tingkat_lembaga;
                 }
                 ?>
-                <!-- alert -->
-                <?php if (!empty(session()->getFlashdata('gagal'))) { ?>
-                        <div class="alert alert-danger">
-                            <?php echo session()->getFlashdata('gagal') ?>
-                        </div>
-                    <?php } ?>
-                    <?php if (!empty(session()->getFlashdata('sukses'))) { ?>
-                        <div class="alert alert-success">
-                            <?php echo session()->getFlashdata('sukses') ?>
-                        </div>
-                <?php } ?>
                 <form novalidate class="form" action="<?= base_url('/Main/save_proposal') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="box-body">

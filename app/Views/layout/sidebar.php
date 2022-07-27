@@ -79,6 +79,21 @@
                     </ul>
                 </li>
                 <!-- ADMIN -->
+                <li class="header">Anggaran</li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Lock-circle"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Pagu Anggaran</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/submit_anggaran') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran</a></li>
+                        <li><a href="<?= base_url('/list_anggaran') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran Lembaga</a></li>
+                    </ul>
+                </li>
+                <!-- ADMIN -->
                 <li class="header">Manajemen Pengguna</li>
                 <li class="treeview">
                     <a href="#">

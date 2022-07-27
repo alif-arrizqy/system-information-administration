@@ -11,20 +11,21 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <form>
+                            <form class="form" action="<?= base_url('/Main/submit_laporan_hasil_kegiatan') ?>" method="post">
+                            <?= csrf_field(); ?>
                                 <div class="form-group">
                                     <div class="controls">
                                         <label for="wLocation1"> Proposal Kegiatan : </label>
-                                        <select class="form-control select2" required id="wLocation1" name="jenis_surat" style="width: 100%;">
-                                            <option value="0">Surat Undangan</option>
-                                            <option value="1">Surat Tugas</option>
-                                            <option value="2">Surat Keputusan</option>
-                                            <option value="3">Surat Permohonan</option>
+                                        <select class="form-control select2" required id="wLocation1" name="search_kegiatan" style="width: 100%;">
+                                            <option selected value="">Pilih Proposal Kegiatan</option>
+                                            <?php foreach($get_kegiatan as $rs) { ?>
+                                            <option value="<?= $rs['id_proposal'] ?>"><?= $rs['judul_kegiatan'] ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>    
                                 </div>
                                 <div class="form-group text-right">
-                                    <button type="button" class="waves-effect waves-light btn btn-sm btn-primary mb-5">
+                                    <button type="submit" class="waves-effect waves-light btn btn-sm btn-primary mb-5">
                                         <i class="fa fa-search"></i> Cari</button>
                                 </div>
                             </form>
@@ -36,6 +37,7 @@
     </div>
 
     <!-- form -->
+    <?php foreach ($get_proposal as $hsl){?>
     <div class="row">
         <div class="col-lg-12 col-12">
             <div class="box">
@@ -52,16 +54,11 @@
                 ?>
                 <!-- alert -->
                 <?php if (!empty(session()->getFlashdata('gagal'))) { ?>
-                        <div class="alert alert-danger">
-                            <?php echo session()->getFlashdata('gagal') ?>
-                        </div>
-                    <?php } ?>
-                    <?php if (!empty(session()->getFlashdata('sukses'))) { ?>
-                        <div class="alert alert-success">
-                            <?php echo session()->getFlashdata('sukses') ?>
-                        </div>
+                    <div class="alert alert-danger">
+                        <?php echo session()->getFlashdata('gagal') ?>
+                    </div>
                 <?php } ?>
-                <form novalidate class="form" action="<?= base_url('#') ?>" method="post" enctype="multipart/form-data">
+                <form novalidate class="form" action="<?= base_url('/Main/save_laporan_hasil_kegiatan') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="box-body">
                         <h4 class="box-title text-info"><i class="ti-user mr-15"></i> Proposal Info</h4>
@@ -70,14 +67,14 @@
                                 <div class="form-group">
                                     <label>Judul Kegiatan</label>
                                     <div class="controls">
-                                        <input type="text" class="form-control" name="judul" value="Judul" readonly>
+                                        <input type="text" class="form-control" name="judul" value="<?= $hsl['judul_kegiatan'] ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Pengajuan Anggaran</label>
                                         <div class="controls">
                                             <div class="input-group"> <span class="input-group-addon">Rp</span>
-                                            <input type="text" class="form-control" name="pengajuan_anggaran" value="<?= number_format('10000000')?>" readonly>
+                                            <input type="text" class="form-control" name="pengajuan_anggaran" value="<?= number_format($hsl['pengajuan_anggaran'])?>" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -86,13 +83,14 @@
                                 <div class="form-group">
                                     <label>Lembaga</label>
                                     <input type="text" class="form-control" placeholder="Nama Lembaga" value="<?= $nama_lembaga?>" readonly>
-                                    <input type="hidden" class="form-control" name="id_lembaga" value="<?= $id_lembaga?>">
+                                    <input type="hidden" class="form-control" name="id_lembaga" value="<?= $id_lembaga ?>">
+                                    <input type="hidden" class="form-control" name="id_proposal" value="<?= $hsl['id_proposal'] ?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Anggaran Diterima</label>
                                         <div class="controls">
                                             <div class="input-group"> <span class="input-group-addon">Rp</span>
-                                            <input type="text" class="form-control" name="pengajuan_anggaran" value="<?= number_format('10000000')?>" readonly>
+                                            <input type="text" class="form-control" name="pengajuan_anggaran" value="<?= number_format($hsl['anggaran_diterima'])?>" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +104,7 @@
                                     <label>Realisasi Anggaran</label>
                                         <div class="controls">
                                             <div class="input-group"> <span class="input-group-addon">Rp</span>
-                                            <input type="text" class="form-control" name="pengajuan_anggaran" placeholder="Anggaran yang di ajukan" required onKeyPress="return numbersonly(this, event)" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" >
+                                            <input type="text" class="form-control" name="realisasi_anggaran" placeholder="Realisasi Anggaran" required onKeyPress="return numbersonly(this, event)" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);" >
                                         </div>
                                     </div>
                                 </div>
@@ -133,6 +131,8 @@
                         </button>
                     </div>
                 </form>
+                <?php } ?>
+
             </div>
             <!-- /.box -->
         </div>

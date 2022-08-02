@@ -68,7 +68,7 @@
     <div class="row">
         <div class="col-lg-12 col-12">
             <div class="box">
-                <form novalidate class="form" action="<?= base_url('/KelembagaanAnggaran/edit_pagu_anggaran') ?>" method="post">
+                <form novalidate class="form" action="<?= base_url('/KelembagaanAnggaran/add_anggaran') ?>" method="post">
                     <?= csrf_field(); ?>
                     <div class="box-body">
                         <h4 class="box-title text-info"><i class="ti-write mr-15"></i> Submit Anggaran</h4>

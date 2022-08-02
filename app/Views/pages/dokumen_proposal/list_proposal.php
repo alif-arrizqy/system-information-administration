@@ -108,7 +108,6 @@
 </div>
 <?php } ?>
 
-
 <!-- Modal Edit -->
 <?php foreach($get_proposal as $rs) { ?>
 <div class="modal fade" id="editModal<?=$rs['id_proposal']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

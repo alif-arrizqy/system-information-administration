@@ -17,7 +17,7 @@ class pelaksanaanModel extends Model
     public function get_info_laporan_kegiatan($id_lembaga)
     {
         // $id_lembaga = session()->get('id_lembaga');
-        return $this->db->query("SELECT proposal.pengajuan_anggaran, proposal.anggaran_diterima, lembaga.nama_lembaga, laporan_kegiatan.files, 
+        return $this->db->query("SELECT proposal.judul_kegiatan, proposal.pengajuan_anggaran, proposal.anggaran_diterima, lembaga.nama_lembaga, laporan_kegiatan.files, 
         laporan_kegiatan.id_laporan_keg, laporan_kegiatan.realisasi_anggaran
         FROM laporan_kegiatan INNER JOIN proposal ON laporan_kegiatan.id_proposal = proposal.id_proposal
         INNER JOIN lembaga ON laporan_kegiatan.id_lembaga = lembaga.id_lembaga

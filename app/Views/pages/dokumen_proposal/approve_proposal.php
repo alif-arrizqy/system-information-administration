@@ -32,7 +32,9 @@
 									<th><center>Anggaran Diterima</center></th>
 									<th><center>File</center></th>
 									<th><center>Status</center></th>
-									<th><center>Action</center></th>
+									<?php if (session()->get('status') != 2 and session()->get('status') != 3) { ?>
+										<th><center>Action</center></th>
+									<?php } ?>
 								</tr>
 							</thead>
 							<tbody>
@@ -64,6 +66,7 @@
 										</a>
 									</center></td>
 									<td><center><?= $approve ?></center></td>
+									<?php if (session()->get('status') != 2 and session()->get('status') != 3) { ?>
 									<td>
 										<center>
 											<button type="button" class="btn btn-primary" title="Approve Data" data-toggle="modal" data-target="#approveModal<?= $rs['id_proposal'] ?>">
@@ -71,6 +74,7 @@
 											</button>
 										</center>
 									</td>
+									<?php } ?>
 								</tr>
 								<?php } ?>
 							</tbody>

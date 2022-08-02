@@ -59,7 +59,7 @@
 									<td><center><?=$nama_lembaga?></center></td>
 									<td><center><?=$status_surat?></center></td>
 									<td><center>
-										<a href="<?= base_url('Main/download_surat/'.$rs['id_surat']) ?>">
+										<a href="<?= base_url('Surat/download_surat/'.$rs['id_surat']) ?>">
 											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg" alt="<?= $rs['file'] ?>">
 										</a>
 										</center>
@@ -95,7 +95,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<?php echo form_open('/Main/delete_surat' . '/' . $rs['id_surat']) ?>
+			<?php echo form_open('/Surat/delete_surat' . '/' . $rs['id_surat']) ?>
 			<div class="modal-body">
 				<p>Hapus Data Terpilih ? </p>
 				<input type="hidden" name="file" value="<?= $rs['file'] ?>">

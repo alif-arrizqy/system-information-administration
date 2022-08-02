@@ -41,18 +41,18 @@ $routes->get('Login', 'Login::index');
 $routes->get('/Home', 'Main::index', ['filter' => 'auth']);
 
 // proposal
-$routes->get('/submit_proposal', 'Main::submit_proposal', ['filter' => 'auth']);
-$routes->get('/list_proposal', 'Main::list_proposal', ['filter' => 'auth']);
-$routes->get('/approve_proposal', 'Main::approve_proposal', ['filter' => 'auth']);
+$routes->get('/submit_proposal', 'Proposal::submit_proposal', ['filter' => 'auth']);
+$routes->get('/list_proposal', 'Proposal::list_proposal', ['filter' => 'auth']);
+$routes->get('/approve_proposal', 'Proposal::approve_proposal', ['filter' => 'auth']);
 
 // laporan_hasil_kegiatan
-$routes->get('/submit_laporan_hasil_kegiatan', 'Main::submit_laporan_hasil_kegiatan', ['filter' => 'auth']);
-$routes->get('/list_laporan_hasil_kegiatan', 'Main::list_laporan_hasil_kegiatan', ['filter' => 'auth']);
+$routes->get('/submit_laporan_hasil_kegiatan', 'LaporanKegiatan::submit_laporan_hasil_kegiatan', ['filter' => 'auth']);
+$routes->get('/list_laporan_hasil_kegiatan', 'LaporanKegiatan::list_laporan_hasil_kegiatan', ['filter' => 'auth']);
 
 // persuratan
-$routes->get('/submit_surat', 'Main::submit_surat', ['filter' => 'auth']);
-$routes->get('/list_surat_masuk', 'Main::list_surat_masuk', ['filter' => 'auth']);
-$routes->get('/list_surat_keluar', 'Main::list_surat_keluar', ['filter' => 'auth']);
+$routes->get('/submit_surat', 'Surat::submit_surat', ['filter' => 'auth']);
+$routes->get('/list_surat_masuk', 'Surat::list_surat_masuk', ['filter' => 'auth']);
+$routes->get('/list_surat_keluar', 'Surat::list_surat_keluar', ['filter' => 'auth']);
 
 // pelaksanaan
 // rekap

@@ -16,7 +16,7 @@
                     $tingkat_lembaga = $rs->tingkat_lembaga;
                 }
                 ?>
-                <form novalidate class="form" action="<?= base_url('/Main/save_surat') ?>" method="post" enctype="multipart/form-data">
+                <form novalidate class="form" action="<?= base_url('/Surat/save_surat') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="box-body">
                         <h4 class="box-title text-info"><i class="ti-user mr-15"></i> Identitas Surat</h4>

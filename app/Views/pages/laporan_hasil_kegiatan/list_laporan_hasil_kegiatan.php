@@ -82,7 +82,7 @@
 							<thead>
 								<tr>
 									<th><center>No</center></th>
-									<th><center>Lembaga</center></th>
+									<th><center>Judul Proposal</center></th>
 									<th><center>Pengajuan Anggaran</center></th>
 									<th><center>Anggaran Diterima</center></th>
 									<th><center>Realisasi Anggaran</center></th>
@@ -97,12 +97,12 @@
 								?>
 								<tr>
 									<td><center><?=$no++?></center></td>
-									<td><center><?= $rs['nama_lembaga'] ?></center></td>
+									<td><center><?= $rs['judul_kegiatan'] ?></center></td>
 									<td><center>Rp<?= number_format($rs['pengajuan_anggaran']) ?></center></td>
 									<td><center>Rp<?= number_format($rs['anggaran_diterima']) ?></center></td>
 									<td><center>Rp<?= number_format($rs['realisasi_anggaran']) ?></center></td>
 									<td><center>
-										<a href="<?= base_url('Main/download_laporan_kegiatan/'.$rs['id_laporan_keg']) ?>">
+										<a href="<?= base_url('LaporanKegiatan/download_laporan_kegiatan/'.$rs['id_laporan_keg']) ?>">
 											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg">
 										</a>
 									</center></td>
@@ -140,7 +140,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<?php echo form_open('/Main/delete_laporan_keg' . '/' . $rs['id_laporan_keg']) ?>
+			<?php echo form_open('/LaporanKegiatan/delete_laporan_keg' . '/' . $rs['id_laporan_keg']) ?>
 			<div class="modal-body">
 				<p>Hapus Data Terpilih ? </p>
 				<input type="hidden" name="file" value="<?= $rs['files'] ?>">
@@ -166,7 +166,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form novalidate class="form" action="<?= base_url('/Main/edit_laporan_keg') ?>" method="post" enctype="multipart/form-data">
+			<form novalidate class="form" action="<?= base_url('/LaporanKegiatan/edit_laporan_keg') ?>" method="post" enctype="multipart/form-data">
 			<?= csrf_field(); ?>
 				<div class="modal-body">
                     <div class="box-body">

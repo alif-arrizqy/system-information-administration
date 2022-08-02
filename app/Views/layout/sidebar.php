@@ -20,6 +20,7 @@
             </div>
         </div>
     </div>
+    <!-- ADMIN -->
     <?php if(session()->get('status') == 0) { ?>
     <div class="multinav">
         <div class="multinav-scroll" style="height: 100%;">
@@ -215,6 +216,8 @@
             </ul>
         </div>
     </div>
+
+    <!-- USER -->
     <?php } if (session()->get('status') == 1) { ?>
     <div class="multinav">
         <div class="multinav-scroll" style="height: 100%;">
@@ -277,5 +280,118 @@
             </ul>
         </div>
     </div>
-    <?php } ?>
+
+    <!-- WAREK 1 & 2 -->
+    <?php } if(session()->get('status') == 2 or session()->get('status') == 3) { ?>
+    <div class="multinav">
+        <div class="multinav-scroll" style="height: 100%;">
+            <!-- sidebar menu-->
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="treeview-menu">
+                <li>
+                    <a href="<?= base_url('Home') ?>"><i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Dashboard</span>
+                </li>
+                </li>
+                <li class="header">Proposal </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Write"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Dokumen Proposal</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <!-- DIRMAWA -->
+                        <li><a href="<?= base_url('/approve_proposal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Approve Proposal</a></li>
+                    </ul>
+                </li>
+                <li class="header">Surat </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Mail"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Persuratan</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <!-- USER -->
+                        <li><a href="<?= base_url('/submit_surat') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Surat</a></li>
+                        <!-- ADMIN DAN USER -->
+                        <li><a href="<?= base_url('/list_surat_masuk') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Surat Masuk</a></li>
+                        <!-- USER -->
+                        <li><a href="<?= base_url('/list_surat_keluar') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Surat Keluar</a></li>
+                    </ul>
+                </li>
+                <!-- DIRMAWA -->
+                <li class="header">Pelaksanaan</li>
+                <!-- DIRMAWA -->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Rekap Kegiatan</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/realisasi_kegiatan') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Universitas</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/realisasi_kegiatan_lembaga/univ') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span></i>
+                        <span>UKM</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/realisasi_kegiatan_lembaga/ukm') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
+                    </ul>
+                </li>
+                <!-- WAREK 2 -->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Fakultas</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/realisasi_kegiatan_lembaga/fak') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Program Studi</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/realisasi_kegiatan_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <?php }?>
+
 </section>

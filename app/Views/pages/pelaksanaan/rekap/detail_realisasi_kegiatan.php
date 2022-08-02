@@ -68,7 +68,7 @@
 							<thead>
 								<tr>
 									<th><center>No</center></th>
-									<th><center>Lembaga</center></th>
+									<th><center>Judul Proposal</center></th>
 									<th><center>Pengajuan Anggaran</center></th>
 									<th><center>Anggaran Diterima</center></th>
 									<th><center>Realisasi Anggaran</center></th>
@@ -82,7 +82,7 @@
 								?>
 								<tr>
 									<td><center><?=$no++?></center></td>
-									<td><center><?= $rs['nama_lembaga'] ?></center></td>
+									<td><center><?= $rs['judul_kegiatan'] ?></center></td>
 									<td><center>Rp<?= number_format($rs['pengajuan_anggaran']) ?></center></td>
 									<td><center>Rp<?= number_format($rs['anggaran_diterima']) ?></center></td>
 									<td><center>Rp<?= number_format($rs['realisasi_anggaran']) ?></center></td>

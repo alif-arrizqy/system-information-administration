@@ -41,7 +41,7 @@
 									if ($rs['status'] == 0){
 										// $status_surat = "<span class='label label-warning'>unread</span>";
 										$status_surat = "<span class='label label-warning'>
-											<a href='".base_url('/Main/status_baca/'.$rs['id_surat'])."' style='color:white'>unread</a>
+											<a href='".base_url('/Surat/status_baca/'.$rs['id_surat'])."' style='color:white'>unread</a>
 											</span>";
 									} else if ($rs['status'] == 1){
 										$status_surat = "<span class='label label-primary'>read</span>";
@@ -61,7 +61,7 @@
 									<td><center><?=$nama_lembaga?></center></td>
 									<td><center><?=$status_surat?></center></td>
 									<td><center>
-										<a href="<?= base_url('Main/download_surat/'.$rs['id_surat']) ?>">
+										<a href="<?= base_url('Surat/download_surat/'.$rs['id_surat']) ?>">
 											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg" alt="<?= $rs['file'] ?>">
 										</a>
 										</center>

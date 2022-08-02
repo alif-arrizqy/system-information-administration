@@ -55,8 +55,16 @@ $routes->get('/list_surat_masuk', 'Main::list_surat_masuk', ['filter' => 'auth']
 $routes->get('/list_surat_keluar', 'Main::list_surat_keluar', ['filter' => 'auth']);
 
 // pelaksanaan
-$routes->get('/realisasi_kegiatan', 'Main::realisasi_kegiatan', ['filter' => 'auth']);
-$routes->get('/detail_realisasi_kegiatan', 'Main::detail_realisasi_kegiatan', ['filter' => 'auth']);
+// rekap
+$routes->get('/realisasi_kegiatan', 'Pelaksanaan::realisasi_kegiatan', ['filter' => 'auth']);
+$routes->get('/detail_realisasi_kegiatan/(:segment)', 'Pelaksanaan::detail_realisasi_kegiatan/$1', ['filter' => 'auth']);
+// per lembaga
+$routes->get('/realisasi_kegiatan_lembaga/(:segment)', 'Pelaksanaan::realisasi_kegiatan_kelembagaan/$1', ['filter' => 'auth']);
+$routes->get('/detail_realisasi_kegiatan_lembaga/(:segment)', 'Pelaksanaan::realisasi_kegiatan_kelembagaan/$1', ['filter' => 'auth']);
+
+// anggaran
+$routes->get('/submit_lembaga/(:segment)', 'KelembagaanAnggaran::submit_lembaga/$1', ['filter' => 'auth']);
+$routes->get('/list_lembaga/(:segment)', 'KelembagaanAnggaran::list_lembaga/$1', ['filter' => 'auth']);
 
 // manajemen user
 $routes->get('/list_admin', 'Main::list_admin', ['filter' => 'auth']);

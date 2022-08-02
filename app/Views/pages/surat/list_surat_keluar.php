@@ -25,14 +25,14 @@
 						<table id="example1" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
 							<thead>
 								<tr>
-									<th>No</th>
-									<th>Nomor Surat</th>
-									<th>Tanggal Surat</th>
-									<th>Nama Penerima</th>
-									<th>Lembaga Penerima</th>
-									<th>Status</th>
-									<th>File</th>
-									<th>Action</th>
+									<th><center>No</center></th>
+									<th><center>Nomor Surat</center></th>
+									<th><center>Tanggal Surat</center></th>
+									<th><center>Nama Penerima</center></th>
+									<th><center>Lembaga Penerima</center></th>
+									<th><center>Status</center></th>
+									<th><center>File</center></th>
+									<th><center>Action</center></th>
 								</tr>
 							</thead>
 							<tbody>

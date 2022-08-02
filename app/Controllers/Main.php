@@ -254,10 +254,11 @@ class Main extends BaseController
 
     public function list_laporan_hasil_kegiatan()
     {
+      $id_lembaga = session()->get('id_lembaga');
       $data['get_lembaga'] = $this->mainModel->get_info_login_lembaga();
-      $data['get_laporan'] = $this->mainModel->get_info_laporan_kegiatan();
-      $data['get_pagu'] = $this->mainModel->get_pagu_anggaran();
-      $data['sum_realisasi'] = $this->mainModel->sum_realisasi_anggaran();
+      $data['get_laporan'] = $this->mainModel->get_info_laporan_kegiatan($id_lembaga);
+      $data['get_pagu'] = $this->mainModel->get_pagu_anggaran($id_lembaga);
+      $data['sum_realisasi'] = $this->mainModel->sum_realisasi_anggaran($id_lembaga);
       return view('pages/laporan_hasil_kegiatan/list_laporan_hasil_kegiatan', $data);
     }
 
@@ -465,14 +466,57 @@ class Main extends BaseController
   public function realisasi_kegiatan()
   {
     $data['get_lembaga'] = $this->mainModel->get_info_login_lembaga();
+    $data['get_pagu'] = $this->mainModel->get_all_pagu_anggaran();
+    $data['sum_realisasi'] = $this->mainModel->sum_all_realisasi_anggaran();
+    $data['get_anggaran'] = $this->mainModel->get_all_anggaran_lembaga();
     return view('pages/pelaksanaan/realisasi_kegiatan', $data);
   }
 
-  public function detail_realisasi_kegiatan()
+  public function detail_realisasi_kegiatan($id_lembaga)
   {
     $data['get_lembaga'] = $this->mainModel->get_info_login_lembaga();
+    $data['get_laporan'] = $this->mainModel->get_info_laporan_kegiatan($id_lembaga);
+    $data['get_pagu'] = $this->mainModel->get_pagu_anggaran($id_lembaga);
+    $data['sum_realisasi'] = $this->mainModel->sum_realisasi_anggaran($id_lembaga);
     return view('pages/pelaksanaan/detail_realisasi_kegiatan', $data);
   }
+
+  // anggaran
+  public function submit_pagu_anggaran()
+  {
+    $data['get_lembaga'] = $this->mainModel->get_info_login_lembaga();
+    $data['get_no_anggaran'] = $this->mainModel->get_lembaga_no_anggaran();
+    return view('pages/pagu_anggaran/submit_pagu_anggaran', $data);
+  }
+
+  public function list_pagu_anggaran()
+  {
+    $data['get_lembaga'] = $this->mainModel->get_info_login_lembaga();
+    $data['get_pagu'] = $this->mainModel->get_anggaran();
+    return view('pages/pagu_anggaran/list_pagu_anggaran', $data);
+  }
+
+  public function edit_pagu_anggaran()
+  {
+    $id_lembaga = $this->request->getPost('id_lembaga');
+    $pagu_anggaran = $this->request->getPost('pagu_anggaran');
+    $pagu_anggaran = str_replace(",", "", $pagu_anggaran);
+
+    $kirimdata = [
+      'id_lembaga' => $id_lembaga,
+      'pagu_anggaran' => $pagu_anggaran
+    ];
+    
+    $success = $this->mainModel->update_pagu_anggaran($kirimdata);
+    if ($success){
+      session()->setFlashdata('sukses', 'Data Berhasil Disimpan');
+      return redirect()->to(base_url('/list_pagu_anggaran'));
+    } else {
+      session()->setFlashdata('gagal', 'Data Gagal Disimpan');
+      return redirect()->to(base_url('/list_pagu_anggaran'));
+    }
+  }
+
 
   // manajemen user
   public function list_admin()

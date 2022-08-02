@@ -48,7 +48,7 @@
 				<div class="box-body">
 					<div class="d-flex justify-content-between align-items-center">
 						<div>								
-							<div class="text-dark font-weight-700 h3 mb-2 mt-5"><?= $persen_capaian ?> %</div>
+							<div class="text-dark font-weight-700 h3 mb-2 mt-5"><?= round($persen_capaian) ?> %</div>
 							<div class="font-size-16">Persen Capaian</div>
 						</div>
 						<div class="bg-success-light rounded-circle h-80 w-80 text-center l-h-100">
@@ -81,13 +81,13 @@
 						<table id="example1" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
 							<thead>
 								<tr>
-									<th>No</th>
-									<th>Lembaga</th>
-									<th>Pengajuan Anggaran</th>
-									<th>Anggaran Diterima</th>
-									<th>Realisasi Anggaran</th>
-									<th>File</th>
-									<th>Action</th>
+									<th><center>No</center></th>
+									<th><center>Lembaga</center></th>
+									<th><center>Pengajuan Anggaran</center></th>
+									<th><center>Anggaran Diterima</center></th>
+									<th><center>Realisasi Anggaran</center></th>
+									<th><center>File</center></th>
+									<th><center>Action</center></th>
 								</tr>
 							</thead>
 							<tbody>

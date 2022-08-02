@@ -41,7 +41,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <!-- ADMIN -->
+                        <!-- DIRMAWA -->
                         <li><a href="<?= base_url('/approve_proposal') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Approve Proposal</a></li>
                     </ul>
                 </li>
@@ -63,37 +63,128 @@
                         <li><a href="<?= base_url('/list_surat_keluar') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Surat Keluar</a></li>
                     </ul>
                 </li>
-                <!-- ADMIN -->
+                <!-- DIRMAWA -->
                 <li class="header">Pelaksanaan</li>
+                <!-- DIRMAWA -->
                 <li class="treeview">
                     <a href="#">
-                        <i class="icon-Lock-circle"><span class="path1"></span><span class="path2"></span></i>
-                        <span>Realisasi Kegiatan</span>
+                        <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Rekap Kegiatan</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-right pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<?= base_url('/realisasi_kegiatan') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
-                        <li><a href="<?= base_url('/detail_realisasi_kegiatan') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Detail Kegiatan Lembaga</a></li>
                     </ul>
                 </li>
-                <!-- ADMIN -->
-                <li class="header">Anggaran</li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="icon-Lock-circle"><span class="path1"></span><span class="path2"></span></i>
-                        <span>Pagu Anggaran</span>
+                        <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Universitas</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-right pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?= base_url('/submit_anggaran') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran</a></li>
-                        <li><a href="<?= base_url('/list_anggaran') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran Lembaga</a></li>
+                        <li><a href="<?= base_url('/realisasi_kegiatan_lembaga/univ') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
                     </ul>
                 </li>
-                <!-- ADMIN -->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span></i>
+                        <span>UKM</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/realisasi_kegiatan_lembaga/ukm') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
+                    </ul>
+                </li>
+                <!-- WAREK 2 -->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Fakultas</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/realisasi_kegiatan_lembaga/fak') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Clipboard"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Program Studi</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/realisasi_kegiatan_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
+                    </ul>
+                </li>
+
+                <!-- DIRMAWA -->
+                <li class="header">Kelembagaan & Anggaran</li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Credit-card"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Universitas</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/submit_lembaga/univ') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran Lembaga</a></li>
+                        <li><a href="<?= base_url('/list_lembaga/univ') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran Lembaga</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Credit-card"><span class="path1"></span><span class="path2"></span></i>
+                        <span>UKM</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/submit_lembaga/ukm') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran UKM</a></li>
+                        <li><a href="<?= base_url('/list_lembaga/ukm') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran UKM</a></li>
+                    </ul>
+                </li>
+                <!-- WAREK 2 -->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Credit-card"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Fakultas</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/submit_lembaga/fak') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran Fakultas</a></li>
+                        <li><a href="<?= base_url('/list_lembaga/fak') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran Fakultas</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-Credit-card"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Program Studi</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?= base_url('/submit_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran Prodi</a></li>
+                        <li><a href="<?= base_url('/list_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran Prodi</a></li>
+                    </ul>
+                </li>
+
+                <!-- DIRMAWA -->
                 <li class="header">Manajemen Pengguna</li>
                 <li class="treeview">
                     <a href="#">

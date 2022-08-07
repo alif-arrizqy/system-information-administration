@@ -43,17 +43,19 @@
                                 <div class="controls">
                                     <label for="wLocation1"> Jenis Surat : <span class="danger">*</span> </label>
                                     <select class="form-control select2" required id="wLocation1" name="jenis_surat" style="width: 100%;">
+                                        <option value="">Pilih Jenis Surat</option>
                                         <option value="0">Surat Undangan</option>
-                                        <option value="1">Surat Tugas</option>
-                                        <option value="2">Surat Keputusan</option>
-                                        <option value="3">Surat Permohonan</option>
+                                        <option value="1">Surat Keputusan</option>
+                                        <option value="2">Surat Peminjaman</option>
+                                        <option value="3">Surat Tugas</option>
+                                        <option value="4">Surat Permohonan</option>
                                     </select>
                                 </div>    
                             </div>    
                             </div>
                         </div>
                         <hr class="my-15">
-                        <h4 class="box-title text-info"><i class="ti-save mr-15"></i> Identitas Penerima</h4>
+                        <h4 class="box-title text-info"><i class="ti-flag mr-15"></i> Identitas Penerima</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -68,6 +70,7 @@
                                     <div class="controls">
                                         <label for="behName3">Lembaga Penerima :</label>
                                         <select class="form-control select2" required id="behName3" name="lembaga_penerima" style="width: 100%;">
+                                            <option value="">Pilih Lembaga</option>
                                             <?php foreach($get_all_lembaga as $rs) {?>
                                                 <option value="<?= $rs['id_lembaga'] ?>"><?= $rs['nama_lembaga'] ?></option>
                                             <?php } ?>
@@ -77,7 +80,32 @@
                             </div>
                         </div>
                         <hr class="my-15">
-                        <h4 class="box-title text-info"><i class="ti-save mr-15"></i> Identitas Pengirim</h4>
+                        <h4 class="box-title text-info"><i class="ti-bookmark mr-15"></i> Disposisi Surat</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="controls">
+                                    <label for="jobTitle3">Nama Penerima Disposisi :</label>
+                                    <input type="text" class="form-control" required id="jobTitle3" placeholder="Nama Penerima Disposisi" name="nama_disposisi">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                    <div class="controls">
+                                        <label for="behName3">Lembaga Penerima Disposisi :</label>
+                                        <select class="form-control select2" required id="behName3" name="lembaga_disposisi" style="width: 100%;">
+                                            <option value="">Pilih Lembaga</option>
+                                            <?php foreach($get_all_lembaga as $rs) {?>
+                                                <option value="<?= $rs['id_lembaga'] ?>"><?= $rs['nama_lembaga'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-15">
+                        <h4 class="box-title text-info"><i class="ti-announcement mr-15"></i> Identitas Pengirim</h4>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -97,7 +125,7 @@
                             </div>
                         </div>
                         <hr class="my-15">
-                        <h4 class="box-title text-info"><i class="ti-save mr-15"></i> Submit Surat</h4>
+                        <h4 class="box-title text-info"><i class="ti-location-arrow mr-15"></i> Submit Surat</h4>
                         <div class="row">
                             <div class="col-md-6">
                             <div class="form-group">

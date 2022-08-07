@@ -11,7 +11,13 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <form class="form" action="<?= base_url('/Main/submit_laporan_hasil_kegiatan') ?>" method="post">
+                            <!-- alert -->
+                            <?php if (!empty(session()->getFlashdata('gagal'))) { ?>
+                                <div class="alert alert-danger">
+                                    <?php echo session()->getFlashdata('gagal') ?>
+                                </div>
+                            <?php } ?>
+                            <form class="form" action="<?= base_url('/LaporanKegiatan/submit_laporan_hasil_kegiatan') ?>" method="post">
                             <?= csrf_field(); ?>
                                 <div class="form-group">
                                     <div class="controls">
@@ -52,13 +58,7 @@
                     $tingkat_lembaga = $rs->tingkat_lembaga;
                 }
                 ?>
-                <!-- alert -->
-                <?php if (!empty(session()->getFlashdata('gagal'))) { ?>
-                    <div class="alert alert-danger">
-                        <?php echo session()->getFlashdata('gagal') ?>
-                    </div>
-                <?php } ?>
-                <form novalidate class="form" action="<?= base_url('/Main/save_laporan_hasil_kegiatan') ?>" method="post" enctype="multipart/form-data">
+                <form novalidate class="form" action="<?= base_url('/LaporanKegiatan/save_laporan_hasil_kegiatan') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="box-body">
                         <h4 class="box-title text-info"><i class="ti-user mr-15"></i> Proposal Info</h4>
@@ -123,7 +123,7 @@
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                        <button type="button" class="btn btn-rounded btn-warning btn-outline mr-1">
+                        <button type="reset" class="btn btn-rounded btn-warning btn-outline mr-1">
                             <i class="ti-trash"></i> Batal
                         </button>
                         <button type="submit" class="btn btn-rounded btn-primary btn-outline">

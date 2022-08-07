@@ -52,7 +52,7 @@ class pelaksanaanModel extends Model
     public function get_all_anggaran_lembaga()
     {
         return $this->db->query("SELECT lembaga.nama_lembaga, anggaran.pagu_anggaran, anggaran.id_lembaga
-        FROM anggaran INNER JOIN lembaga ON anggaran.id_lembaga = lembaga.id_lembaga WHERE lembaga.tingkat_lembaga = 1 OR lembaga.tingkat_lembaga = 2")->getResultArray();
+        FROM anggaran INNER JOIN lembaga ON anggaran.id_lembaga = lembaga.id_lembaga")->getResultArray();
     }
 
     // lembaga

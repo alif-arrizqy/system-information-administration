@@ -59,6 +59,16 @@ class Surat extends BaseController
 
         $tgl_surat = $this->request->getPost('tgl_surat');
         $tanggal_surat = date('Y-m-d', strtotime($tgl_surat));
+
+        $nama_disposisi = $this->request->getPost('nama_disposisi');
+        if ($nama_disposisi == "" or $nama_disposisi == NULL) {
+            $nama_disposisi = NULL;
+        }
+        $lembaga_disposisi = $this->request->getPost('lembaga_disposisi');
+        if ($lembaga_disposisi == "" or $lembaga_disposisi == NULL) {
+            $lembaga_disposisi = NULL;
+        }
+
         $file = $this->request->getfile('file');
         $file_name = $file->getRandomName();
         $status = 0;
@@ -72,6 +82,8 @@ class Surat extends BaseController
         'jenis_surat' => $this->request->getPost('jenis_surat'),
         'nama_penerima' => $this->request->getPost('nama_penerima'),
         'lembaga_penerima' => $this->request->getPost('lembaga_penerima'),
+        'nama_disposisi' => $nama_disposisi,
+        'lembaga_disposisi' => $lembaga_disposisi,
         'nama_pengirim' => $this->request->getPost('nama_pengirim'),
         'jabatan' => $this->request->getPost('jabatan'),
         'file' => $file_name,

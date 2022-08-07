@@ -36,6 +36,7 @@ class Proposal extends BaseController
     public function submit_proposal()
     {
       $data['get_lembaga'] = $this->proposalModel->get_info_login_lembaga();
+      $data['get_all_lembaga'] = $this->proposalModel->get_all_lembaga();
       return view('pages/dokumen_proposal/submit_proposal', $data);
     }
 
@@ -68,8 +69,10 @@ class Proposal extends BaseController
         return redirect()->to(base_url('/submit_proposal'));
       }
 
-      $judul = $this->request->getPost('judul');
       $id_lembaga = $this->request->getPost('id_lembaga');
+      $lembaga_penerima = $this->request->getPost('lembaga_penerima');
+      $lembaga_disposisi = $this->request->getPost('lembaga_disposisi');
+      $judul = $this->request->getPost('judul');
       $anggaran = $this->request->getPost('pengajuan_anggaran');
       $pengajuan_anggaran = str_replace(",", "", $anggaran);
       $file = $this->request->getfile('file');
@@ -80,6 +83,8 @@ class Proposal extends BaseController
       
       $kirimdata = [
         'id_lembaga' => $id_lembaga,
+        'lembaga_penerima' => $lembaga_penerima,
+        'lembaga_disposisi' => $lembaga_disposisi,
         'judul_kegiatan' => $judul,
         'pengajuan_anggaran' => $pengajuan_anggaran,
         'file' => $file_name,

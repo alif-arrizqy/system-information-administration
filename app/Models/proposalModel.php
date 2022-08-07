@@ -14,6 +14,11 @@ class proposalModel extends Model
         return $query;
     }
 
+    public function get_all_lembaga()
+    {
+        return $this->db->query("SELECT * FROM lembaga")->getResultArray();       
+    }
+
     public function save_proposal($kirimdata)
     {
         return $this->db->table('proposal')->insert($kirimdata);
@@ -42,7 +47,8 @@ class proposalModel extends Model
 
     public function list_approval()
     {
-        return $this->db->query("SELECT * FROM proposal ORDER BY status ASC")->getResultArray();
+        $id_lembaga = session()->get('id_lembaga');
+        return $this->db->query("SELECT * FROM proposal WHERE lembaga_penerima = '$id_lembaga' or lembaga_disposisi = '$id_lembaga' ORDER BY status ASC")->getResultArray();
     }
 
     public function update_approval($status, $anggaran_diberikan, $id_proposal)

@@ -29,10 +29,10 @@
 									<th><center>Judul Kegiatan</center></th>
 									<th><center>Instansi</center></th>
 									<th><center>Pengajuan Anggaran</center></th>
-									<th><center>Anggaran Diterima</center></th>
+									<th><center>Anggaran Approval</center></th>
 									<th><center>File</center></th>
 									<th><center>Status</center></th>
-									<?php if (session()->get('status') != 2 and session()->get('status') != 3) { ?>
+									<?php if (session()->get('status') == 0 or session()->get('status') == 2) { ?>
 										<th><center>Action</center></th>
 									<?php } ?>
 								</tr>
@@ -61,12 +61,12 @@
 									<td><center>Rp<?= number_format($rs['pengajuan_anggaran']) ?></center></td>
 									<td><center>Rp<?= number_format($rs['anggaran_diterima']) ?></center></td>
 									<td><center>
-										<a href="<?= base_url('Main/download_proposal/'.$rs['id_proposal']) ?>">
+										<a href="<?= base_url('Proposal/download_proposal/'.$rs['id_proposal']) ?>">
 											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg" title="<?= $rs['judul_kegiatan']?>" alt="<?= $rs['file'] ?>">
 										</a>
 									</center></td>
 									<td><center><?= $approve ?></center></td>
-									<?php if (session()->get('status') != 2 and session()->get('status') != 3) { ?>
+									<?php if (session()->get('status') == 0 or session()->get('status') == 2) { ?>
 									<td>
 										<center>
 											<button type="button" class="btn btn-primary" title="Approve Data" data-toggle="modal" data-target="#approveModal<?= $rs['id_proposal'] ?>">
@@ -99,7 +99,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form novalidate class="form" action="<?= base_url('/Main/update_approval') ?>" method="post" enctype="multipart/form-data">
+			<form novalidate class="form" action="<?= base_url('/Proposal/update_approval') ?>" method="post" enctype="multipart/form-data">
 				<?= csrf_field(); ?>
 				<div class="modal-body">
 					<div class="box-body">

@@ -67,10 +67,8 @@ $routes->get('/submit_lembaga/(:segment)', 'KelembagaanAnggaran::submit_lembaga/
 $routes->get('/list_lembaga/(:segment)', 'KelembagaanAnggaran::list_lembaga/$1', ['filter' => 'auth']);
 
 // manajemen user
-$routes->get('/list_admin', 'Main::list_admin', ['filter' => 'auth']);
-$routes->get('/add_admin', 'Main::add_admin', ['filter' => 'auth']);
-$routes->get('/list_user', 'Main::list_user', ['filter' => 'auth']);
-$routes->get('/add_user', 'Main::add_user', ['filter' => 'auth']);
+$routes->get('/list_users', 'Users::list_users', ['filter' => 'auth']);
+$routes->get('/submit_users', 'Users::submit_users', ['filter' => 'auth']);
 
 
 

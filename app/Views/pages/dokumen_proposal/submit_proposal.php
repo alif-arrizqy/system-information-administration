@@ -27,9 +27,40 @@
 						<?php echo session()->getFlashdata('gagal') ?>
 					</div>
 				<?php } ?>
-                <form novalidate class="form" action="<?= base_url('/Main/save_proposal') ?>" method="post" enctype="multipart/form-data">
+                <form novalidate class="form" action="<?= base_url('/Proposal/save_proposal') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="box-body">
+                        <h4 class="box-title text-info"><i class="ti-flag mr-15"></i> Identitas Penerima</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="controls">
+                                    <label for="jobTitle3">Lembaga Tujuan :</label>
+                                    <select class="form-control select2" required id="behName3" name="lembaga_penerima" style="width: 100%;">
+                                        <option>Pilih Lembaga Tujuan</option>
+                                        <?php foreach($get_all_lembaga as $rs) {?>
+                                            <option value="<?= $rs['id_lembaga'] ?>"><?= $rs['nama_lembaga'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                    <div class="controls">
+                                        <label for="behName3">Disposisi :</label>
+                                        <select class="form-control select2" required id="behName3" name="lembaga_disposisi" style="width: 100%;">
+                                            <option>Pilih Lembaga Disposisi</option>
+                                            <?php foreach($get_all_lembaga as $rs) {?>
+                                                <option value="<?= $rs['id_lembaga'] ?>"><?= $rs['nama_lembaga'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-15">
+                        <h4 class="box-title text-info"><i class="ti-user mr-15"></i> Proposal Data</h4>
                         <div class="form-group">
                             <label>Judul Kegiatan</label>
                             <div class="controls">
@@ -57,7 +88,6 @@
                                 </label>
                             </div>
                         </div>
-
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">

@@ -38,7 +38,7 @@ class suratModel extends Model
     public function get_surat_masuk()
     {
         $id_lembaga = session()->get('id_lembaga');
-        return $this->db->query("SELECT * FROM surat WHERE lembaga_penerima = '$id_lembaga' ORDER BY status ASC")->getResultArray();
+        return $this->db->query("SELECT * FROM surat WHERE lembaga_penerima = '$id_lembaga' OR lembaga_disposisi = '$id_lembaga' ORDER BY tanggal_surat DESC")->getResultArray();
     }
 
     public function status_baca($id_surat)

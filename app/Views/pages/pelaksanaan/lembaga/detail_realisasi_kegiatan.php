@@ -87,7 +87,7 @@
 									<td><center>Rp<?= number_format($rs['anggaran_diterima']) ?></center></td>
 									<td><center>Rp<?= number_format($rs['realisasi_anggaran']) ?></center></td>
 									<td><center>
-										<a href="<?= base_url('Main/download_laporan_kegiatan/'.$rs['id_laporan_keg']) ?>">
+										<a href="<?= base_url('LaporanKegiatan/download_laporan_kegiatan/'.$rs['id_laporan_keg']) ?>">
 											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg">
 										</a>
 									</center></td>

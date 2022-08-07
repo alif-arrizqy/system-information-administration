@@ -54,7 +54,7 @@
 									<td><center>Rp<?= number_format($rs['pengajuan_anggaran']) ?></center></td>
 									<td><center>Rp<?= number_format($rs['anggaran_diterima']) ?></center></td>
 									<td><center>
-										<a href="<?= base_url('Main/download_proposal/'.$rs['id_proposal']) ?>">
+										<a href="<?= base_url('Proposal/download_proposal/'.$rs['id_proposal']) ?>">
 											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg" title="<?= $rs['judul_kegiatan']?>" alt="<?= $rs['file'] ?>">
 										</a>
 									</center></td>
@@ -93,7 +93,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<?php echo form_open('/Main/delete_proposal' . '/' . $rs['id_proposal']) ?>
+			<?php echo form_open('/Proposal/delete_proposal' . '/' . $rs['id_proposal']) ?>
 			<div class="modal-body">
 				<p>Hapus Data Terpilih ? </p>
 				<input type="hidden" name="file" value="<?= $rs['file'] ?>">
@@ -119,7 +119,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form novalidate class="form" action="<?= base_url('/Main/edit_proposal') ?>" method="post" enctype="multipart/form-data">
+			<form novalidate class="form" action="<?= base_url('/Proposal/edit_proposal') ?>" method="post" enctype="multipart/form-data">
 				<?= csrf_field(); ?>
 				<div class="modal-body">
 					<div class="box-body">

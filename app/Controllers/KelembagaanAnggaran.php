@@ -17,7 +17,7 @@ class KelembagaanAnggaran extends BaseController
       helper('form');
     }
 
-    // anggaran
+    // lembaga dan anggaran
     public function submit_lembaga($jenis_lembaga)
     {
         if ($jenis_lembaga == 'univ'){
@@ -32,6 +32,8 @@ class KelembagaanAnggaran extends BaseController
 
         $data['get_lembaga'] = $this->kelembagaanAnggaranModel->get_info_login_lembaga();
         $data['get_no_anggaran'] = $this->kelembagaanAnggaranModel->get_lembaga_no_anggaran($tingkat_lembaga);
+        $data['get_fakultas'] = $this->kelembagaanAnggaranModel->get_fakultas();
+        $data['get_prodi'] = $this->kelembagaanAnggaranModel->get_prodi();
         $data['tingkat_lembaga'] = $tingkat_lembaga;
         return view('pages/kelembagaan_anggaran/submit_lembaga_anggaran', $data);
     }
@@ -98,12 +100,27 @@ class KelembagaanAnggaran extends BaseController
         } else if ($tingkat_lembaga == 4){
             $jenis_lembaga = "prodi";
         }
+        
+        $id_fakultas = $this->request->getPost('fakultas');
+        if (!empty($id_fakultas)) {
+            $id_fakultas = $this->request->getPost('fakultas');
+        } else {
+            $id_fakultas = Null;
+        }
+        $id_prodi = $this->request->getPost('prodi');
+        if (!empty($id_prodi)) {
+            $id_prodi = $this->request->getPost('prodi');
+        } else {
+            $id_prodi = Null;
+        }
+
         $kirimdata = [
-            'nama_lembaga' => $this->request->getPost('nama_lembaga'),
+            'nama_lembaga' => strtoupper($this->request->getPost('nama_lembaga')),
             'tingkat_lembaga' => $tingkat_lembaga,
+            'id_fakultas' => $id_fakultas,
+            'id_prodi' => $id_prodi,
         ];
         $success = $this->kelembagaanAnggaranModel->save_lembaga($kirimdata);
-        
         
         if ($success){
             session()->setFlashdata('sukses', 'Data Berhasil Disimpan');

@@ -142,7 +142,7 @@
                         </ul>
                     </li>
                 
-                <li class="header">Kelembagaan & Anggaran</li>
+                <li class="header">Kelembagaan Mahasiswa</li>
                     <li class="treeview">
                         <a href="#">
                             <i class="icon-Credit-card"><span class="path1"></span><span class="path2"></span></i>
@@ -152,8 +152,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= base_url('/submit_lembaga/univ') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran Lembaga</a></li>
-                            <li><a href="<?= base_url('/list_lembaga/univ') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran Lembaga</a></li>
+                            <li><a href="<?= base_url('/submit_lembaga/univ') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Kelembagaan Mhs</a></li>
+                            <li><a href="<?= base_url('/list_lembaga/univ') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Kelembagaan Mhs</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -178,8 +178,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= base_url('/submit_lembaga/fak') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran Fakultas</a></li>
-                            <li><a href="<?= base_url('/list_lembaga/fak') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran Fakultas</a></li>
+                            <li><a href="<?= base_url('/submit_lembaga/fak') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Kelembagaan Mhs</a></li>
+                            <li><a href="<?= base_url('/list_lembaga/fak') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Kelembagaan Mhs</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -191,11 +191,10 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= base_url('/submit_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran Prodi</a></li>
-                            <li><a href="<?= base_url('/list_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran Prodi</a></li>
+                            <li><a href="<?= base_url('/submit_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Kelembagaan Mhs</a></li>
+                            <li><a href="<?= base_url('/list_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Kelembagaan Mhs</a></li>
                         </ul>
-                    </li>
-                
+                    </li>                
                 <li class="header">Manajemen Pengguna</li>
                     <li class="treeview">
                         <a href="#">

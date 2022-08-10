@@ -51,4 +51,14 @@ class kelembagaanAnggaranModel extends Model
         return $this->db->query("DELETE FROM anggaran WHERE id_lembaga = '$id_lembaga'");
     }
 
+    public function get_fakultas()
+    {
+        return $this->db->query("SELECT * FROM fakultas")->getResultArray();
+    }
+
+    public function get_prodi()
+    {
+        return $this->db->query("SELECT * FROM program_studi")->getResultArray();
+    }
+
 }

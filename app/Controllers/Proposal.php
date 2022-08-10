@@ -72,6 +72,7 @@ class Proposal extends BaseController
       $id_lembaga = $this->request->getPost('id_lembaga');
       $lembaga_penerima = $this->request->getPost('lembaga_penerima');
       $lembaga_disposisi = $this->request->getPost('lembaga_disposisi');
+      $lembaga_mengetahui = $this->request->getPost('lembaga_mengetahui');
       $judul = $this->request->getPost('judul');
       $anggaran = $this->request->getPost('pengajuan_anggaran');
       $pengajuan_anggaran = str_replace(",", "", $anggaran);
@@ -85,6 +86,7 @@ class Proposal extends BaseController
         'id_lembaga' => $id_lembaga,
         'lembaga_penerima' => $lembaga_penerima,
         'lembaga_disposisi' => $lembaga_disposisi,
+        'lembaga_mengetahui' => $lembaga_mengetahui,
         'judul_kegiatan' => $judul,
         'pengajuan_anggaran' => $pengajuan_anggaran,
         'file' => $file_name,

@@ -37,7 +37,7 @@
                                     <div class="controls">
                                     <label for="jobTitle3">Lembaga Tujuan :</label>
                                     <select class="form-control select2" required id="behName3" name="lembaga_penerima" style="width: 100%;">
-                                        <option>Pilih Lembaga Tujuan</option>
+                                        <option value="">Pilih Lembaga Tujuan</option>
                                         <?php foreach($get_all_lembaga as $rs) {?>
                                             <option value="<?= $rs['id_lembaga'] ?>"><?= $rs['nama_lembaga'] ?></option>
                                         <?php } ?>
@@ -47,10 +47,23 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                    <div class="controls">
-                                        <label for="behName3">Disposisi :</label>
-                                        <select class="form-control select2" required id="behName3" name="lembaga_disposisi" style="width: 100%;">
-                                            <option>Pilih Lembaga Disposisi</option>
+                                <div class="controls">
+                                    <label for="behName3">Disposisi :</label>
+                                    <select class="form-control select2" required id="behName3" name="lembaga_disposisi" style="width: 100%;">
+                                        <option value="">Pilih Lembaga Disposisi</option>
+                                        <?php foreach($get_all_lembaga as $rs) {?>
+                                            <option value="<?= $rs['id_lembaga'] ?>"><?= $rs['nama_lembaga'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="controls">
+                                        <label for="behName3">Mengetahui :</label>
+                                        <select class="form-control select2" required id="behName3" name="lembaga_mengetahui" style="width: 100%;">
+                                            <option value="">Pilih Lembaga</option>
                                             <?php foreach($get_all_lembaga as $rs) {?>
                                                 <option value="<?= $rs['id_lembaga'] ?>"><?= $rs['nama_lembaga'] ?></option>
                                             <?php } ?>

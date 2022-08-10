@@ -48,7 +48,7 @@ class proposalModel extends Model
     public function list_approval()
     {
         $id_lembaga = session()->get('id_lembaga');
-        return $this->db->query("SELECT * FROM proposal WHERE lembaga_penerima = '$id_lembaga' or lembaga_disposisi = '$id_lembaga' ORDER BY status ASC")->getResultArray();
+        return $this->db->query("SELECT * FROM proposal WHERE lembaga_penerima = '$id_lembaga' or lembaga_disposisi = '$id_lembaga' or lembaga_mengetahui = '$id_lembaga' ORDER BY status ASC")->getResultArray();
     }
 
     public function update_approval($status, $anggaran_diberikan, $id_proposal)

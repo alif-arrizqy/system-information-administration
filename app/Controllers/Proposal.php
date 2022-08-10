@@ -65,7 +65,7 @@ class Proposal extends BaseController
    
         ]
       ])) {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan, Pastikan File yang diupload berupa pdf dan ukuran file maksimal 5 MB');
+        session()->setFlashdata('gagal', 'Data Gagal Disimpan: '.$this->validator->listErrors());
         return redirect()->to(base_url('/submit_proposal'));
       }
 
@@ -128,7 +128,7 @@ class Proposal extends BaseController
    
         ]
       ])) {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan, Pastikan File yang diupload berupa pdf dan ukuran file maksimal 5 MB');
+        session()->setFlashdata('gagal', 'Data Gagal Disimpan:' .$this->validator->listErrors());
         return redirect()->to(base_url('/list_proposal'));
       }
 

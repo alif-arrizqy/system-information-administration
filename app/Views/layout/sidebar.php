@@ -4,6 +4,17 @@
         $nama_lembaga = $rs->nama_lembaga;
         $tingkat_lembaga = $rs->tingkat_lembaga;
     }
+    $id_user = session()->get('id_user');
+    $db = \Config\Database::connect();
+    $query = $db->query("SELECT foto FROM users WHERE id_user = '$id_user'");
+    $row = $query->getRowArray();
+    $img = $row['foto'];
+    
+    if ($img) {
+        $foto = 'public/uploads/images/'.$img;
+    } else {
+        $foto = 'public/assets/images/avatar/avatar-13.png';
+    }
 
     $admin = session()->get('status') == 0;
     $user = session()->get('status') == 1;
@@ -20,7 +31,7 @@
     <div class="user-profile px-20 py-15">
         <div class="d-flex align-items-center">
             <div class="image">
-                <img src="<?= base_url('public/assets/images/avatar/avatar-13.png') ?>" class="avatar avatar-lg bg-primary-light" alt="User Image">
+                <img src="<?= base_url($foto) ?>" class="avatar avatar-lg bg-primary-light" alt="User Image">
             </div>
             <div class="info">
                 <a class="dropdown-toggle px-20" data-toggle="dropdown" href="#"><?= $nama_lembaga?></a>
@@ -165,8 +176,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?= base_url('/submit_lembaga/ukm') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran UKM</a></li>
-                            <li><a href="<?= base_url('/list_lembaga/ukm') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran UKM</a></li>
+                            <li><a href="<?= base_url('/submit_lembaga/ukm') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit UKM</a></li>
+                            <li><a href="<?= base_url('/list_lembaga/ukm') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List UKM</a></li>
                         </ul>
                     </li>
                     <li class="treeview">

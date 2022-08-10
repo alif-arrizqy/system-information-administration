@@ -53,7 +53,7 @@ class Surat extends BaseController
     
         ]
         ])) {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan, Silahkan cek kembali input data Anda');
+        session()->setFlashdata('gagal', 'Data Gagal Disimpan: '.$this->validator->listErrors());
         return redirect()->to(base_url('/submit_surat'));
         }
 

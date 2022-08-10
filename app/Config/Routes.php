@@ -62,7 +62,7 @@ $routes->get('/detail_realisasi_kegiatan/(:segment)', 'Pelaksanaan::detail_reali
 $routes->get('/realisasi_kegiatan_lembaga/(:segment)', 'Pelaksanaan::realisasi_kegiatan_kelembagaan/$1', ['filter' => 'auth']);
 $routes->get('/detail_realisasi_kegiatan_lembaga/(:segment)', 'Pelaksanaan::realisasi_kegiatan_kelembagaan/$1', ['filter' => 'auth']);
 
-// anggaran
+// kelembagaan mhs dan anggaran
 $routes->get('/submit_lembaga/(:segment)', 'KelembagaanAnggaran::submit_lembaga/$1', ['filter' => 'auth']);
 $routes->get('/list_lembaga/(:segment)', 'KelembagaanAnggaran::list_lembaga/$1', ['filter' => 'auth']);
 

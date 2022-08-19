@@ -5,6 +5,11 @@
 # pdf
 *.pdf
 
+# img
+*.png
+*.jpg
+*.jpeg
+
 # OS X
 .DS_Store
 .AppleDouble

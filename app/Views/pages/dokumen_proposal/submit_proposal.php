@@ -17,16 +17,34 @@
                 }
                 ?>
                 <!-- alert -->
-				<?php if (!empty(session()->getFlashdata('sukses'))) { ?>
-					<div class="alert alert-success">
-						<?php echo session()->getFlashdata('sukses') ?>
-					</div>
+				<?php if (session()->getFlashdata('error')) { ?>
+                    <div class="swal" data-swal-error="<?= session()->getFlashdata('error') ?>"></div>
 				<?php } ?>
-				<?php if (!empty(session()->getFlashdata('gagal'))) { ?>
-					<div class="alert alert-danger">
-						<?php echo session()->getFlashdata('gagal') ?>
-					</div>
-				<?php } ?>
+
+                <!-- cek 100% capaian -->
+                <?php
+                    foreach($get_pagu as $rs) {
+                        $pagu = $rs['pagu_anggaran'];
+                    }
+                    foreach($sum_realisasi as $rs) {
+                        $realisasi = $rs;
+                    }
+                    $persen_capaian = ($realisasi / $pagu) * 100;
+                    if ($persen_capaian == 100) {
+                ?>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-12">
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h5><i class="icon fa fa-check"></i> Alert!</h5>
+                                <?= $nama_lembaga ?> telah mencapai 100% persen capaian anggaran tahun <?= date('Y') ?>
+                                <p>Silahkan ajukan proposal dengan menu Dana Subsidi </p>
+                            </div>
+                        </div>
+                    </div>
+                <?php } else { ?>
+
                 <form novalidate class="form" action="<?= base_url('/Proposal/save_proposal') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="box-body">
@@ -112,6 +130,7 @@
                         </button>
                     </div>
                 </form>
+                <?php } ?>
             </div>
             <!-- /.box -->
         </div>

@@ -35,8 +35,11 @@ class Proposal extends BaseController
 
     public function submit_proposal()
     {
+      $id_lembaga = session()->get('id_lembaga');
       $data['get_lembaga'] = $this->proposalModel->get_info_login_lembaga();
       $data['get_all_lembaga'] = $this->proposalModel->get_all_lembaga();
+      $data['get_pagu'] = $this->proposalModel->get_pagu_anggaran($id_lembaga);
+      $data['sum_realisasi'] = $this->proposalModel->sum_realisasi_anggaran($id_lembaga);
       return view('pages/dokumen_proposal/submit_proposal', $data);
     }
 
@@ -62,10 +65,9 @@ class Proposal extends BaseController
             'mime_in' => 'File Extention Harus Berupa pdf',
             'max_size' => 'Ukuran File Maksimal 5 MB'
           ]
-   
         ]
       ])) {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+        session()->setFlashdata('error', 'Gagal Menyimpan! File extention harus berupa pdf dan ukuran maksimal 5 MB');
         return redirect()->to(base_url('/submit_proposal'));
       }
 
@@ -96,10 +98,10 @@ class Proposal extends BaseController
       
       $success = $this->proposalModel->save_proposal($kirimdata);
       if ($success){
-        session()->setFlashdata('sukses', 'Data Berhasil Disimpan');
+        session()->setFlashdata('success', 'Data Berhasil Disimpan');
         return redirect()->to(base_url('/list_proposal'));
       } else {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan');
+        session()->setFlashdata('error', 'Data Gagal Disimpan');
         return redirect()->to(base_url('/list_proposal'));
       }
     }

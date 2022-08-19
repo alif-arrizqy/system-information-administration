@@ -22,3 +22,7 @@
 <!-- validation form -->
 <script type="text/javascript" src="<?= base_url('public/assets/main/js/pages/validation.js') ?>"></script>
 <script type="text/javascript" src="<?= base_url('public/assets/main/js/pages/form-validation.js') ?>"></script>
+
+<!-- sweetalert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript" src="<?= base_url('public/assets/main/js/sweetalert.js') ?>"></script>

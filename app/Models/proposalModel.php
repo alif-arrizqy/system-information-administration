@@ -55,4 +55,15 @@ class proposalModel extends Model
     {
         return $this->db->query("UPDATE proposal SET status = '$status', anggaran_diterima = '$anggaran_diberikan' WHERE id_proposal = '$id_proposal'");
     }
+
+    public function get_pagu_anggaran($id_lembaga)
+    {
+        return $this->db->query("SELECT lembaga.nama_lembaga, anggaran.pagu_anggaran FROM lembaga INNER JOIN anggaran ON lembaga.id_lembaga = anggaran.id_lembaga
+        WHERE lembaga.id_lembaga = '$id_lembaga'")->getResultArray();
+    }
+
+    public function sum_realisasi_anggaran($id_lembaga)
+    {
+        return $this->db->query("SELECT SUM(realisasi_anggaran) AS realisasi_anggaran FROM laporan_kegiatan WHERE id_lembaga = '$id_lembaga'")->getRowArray();
+    }
 }

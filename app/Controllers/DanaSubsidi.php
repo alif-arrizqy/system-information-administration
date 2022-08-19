@@ -24,7 +24,6 @@ class DanaSubsidi extends BaseController
         $file_path = $file['file'];
       }
       try{
-        echo $file_path;
         return $this->response->download('public/uploads/dana_subsidi/' . $file_path, null);
       } catch (\Exception $e) {
         session()->setFlashdata('error', 'Data Tidak Ditemukan');
@@ -139,7 +138,10 @@ class DanaSubsidi extends BaseController
         $file_name = preg_replace('/\s+/', '_', $file_name);
         $file_name = $file_name . '_' . $file->getRandomName();
         $file->move(ROOTPATH . 'public/uploads/dana_subsidi/', $file_name);
-        unlink(ROOTPATH . 'public/uploads/dana_subsidi/' . $this->request->getPost('file_lama'));
+        try {
+          unlink(ROOTPATH . 'public/uploads/dana_subsidi/' . $this->request->getPost('file_lama'));
+        } catch (\Exception $e) {
+        }
       }
 
       $judul = $this->request->getPost('judul');
@@ -167,13 +169,14 @@ class DanaSubsidi extends BaseController
 
     public function delete_dana_subsidi($id_subsidi)
     {
-      unlink(ROOTPATH . 'public/uploads/dana_subsidi/' . $this->request->getPost('file'));
-      $success = $this->danaSubsidiModel->delete_dana_subsidi($id_subsidi);
-      if ($success){
+      try {
+        unlink(ROOTPATH . 'public/uploads/dana_subsidi/' . $this->request->getPost('file'));
+        $this->danaSubsidiModel->delete_dana_subsidi($id_subsidi);
         session()->setFlashdata('success', 'Data Berhasil Dihapus');
         return redirect()->to(base_url('/list_dana_subsidi'));
-      } else {
-        session()->setFlashdata('error', 'Data error Dihapus');
+      } catch (\Exception $e) {
+        $this->danaSubsidiModel->delete_dana_subsidi($id_subsidi);
+        session()->setFlashdata('success', 'Data Berhasil Dihapus');
         return redirect()->to(base_url('/list_dana_subsidi'));
       }
     }

@@ -312,33 +312,6 @@
                             <li><a href="<?= base_url('/realisasi_kegiatan_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Realisasi Kegiatan</a></li>
                         </ul>
                         </li>
-                    <!-- <li class="header">Kelembagaan & Anggaran</li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="icon-Credit-card"><span class="path1"></span><span class="path2"></span></i>
-                                <span>Fakultas</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<?= base_url('/submit_lembaga/fak') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran Fakultas</a></li>
-                                <li><a href="<?= base_url('/list_lembaga/fak') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran Fakultas</a></li>
-                            </ul>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="icon-Credit-card"><span class="path1"></span><span class="path2"></span></i>
-                                <span>Program Studi</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="<?= base_url('/submit_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Anggaran Prodi</a></li>
-                                <li><a href="<?= base_url('/list_lembaga/prodi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Anggaran Prodi</a></li>
-                            </ul>
-                        </li> -->
                 <?php } } ?>
             </ul>
         </div>

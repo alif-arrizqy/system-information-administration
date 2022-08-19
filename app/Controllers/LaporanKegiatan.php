@@ -65,7 +65,7 @@ class LaporanKegiatan extends BaseController
    
         ]
       ])) {
-        session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+        session()->setFlashdata('error', 'Gagal Menyimpan! File extention harus berupa pdf dan ukuran maksimal 5 MB');
         return redirect()->to(base_url('/submit_laporan_hasil_kegiatan'));
       }
 
@@ -101,13 +101,14 @@ class LaporanKegiatan extends BaseController
 
     public function delete_laporan_keg($id_laporan_keg)
     {
-      unlink(ROOTPATH . 'public/uploads/laporan_hasil_kegiatan/' . $this->request->getPost('file'));
-      $success = $this->laporanKegiatanModel->delete_laporan_keg($id_laporan_keg);
-      if ($success){
+      try {
+        unlink(ROOTPATH . 'public/uploads/laporan_hasil_kegiatan/' . $this->request->getPost('file'));
+        $this->laporanKegiatanModel->delete_laporan_keg($id_laporan_keg);
         session()->setFlashdata('success', 'Data Berhasil Dihapus');
-          return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
-      } else {
-        session()->setFlashdata('error', 'Data Gagal Dihapus');
+        return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
+      } catch (\Exception $e) {
+        $this->laporanKegiatanModel->delete_laporan_keg($id_laporan_keg);
+        session()->setFlashdata('success', 'Data Berhasil Dihapus');
         return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
       }
     }
@@ -124,7 +125,7 @@ class LaporanKegiatan extends BaseController
    
         ]
       ])) {
-        session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+        session()->setFlashdata('error', 'Gagal Menyimpan! File extention harus berupa pdf dan ukuran maksimal 5 MB');
         return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
       }
 

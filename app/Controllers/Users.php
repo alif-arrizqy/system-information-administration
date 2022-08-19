@@ -52,7 +52,7 @@ class Users extends BaseController
     
           ]
         ])) {
-          session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+          session()->setFlashdata('error', 'Gagal Menyimpan! File extention harus berupa pdf dan ukuran maksimal 5 MB');
           return redirect()->to(base_url('/submit_users'));
         }
 
@@ -63,7 +63,14 @@ class Users extends BaseController
         $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
         $file_name = preg_replace('/\s+/', '_', $file_name);
         $file_name = $file_name . '_' . $file->getRandomName();
-        $file->move(ROOTPATH . 'public/uploads/images/', $file_name);
+        try {
+          $img = \Config\Services::image()
+          ->withFile($file)
+          ->resize(128, 128, true, 'heigth')
+          ->save(ROOTPATH . 'public/uploads/images/'. $file_name);
+        } catch (\Exception $e) {
+          $file->move(ROOTPATH . 'public/uploads/images/', $file_name);
+        }
 
         $kirimdata = [
             'fullname' => $this->request->getPost('fullname'),
@@ -96,7 +103,7 @@ class Users extends BaseController
             ]
           ]
         ])) {
-          session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+          session()->setFlashdata('error', 'Gagal Menyimpan! File extention harus berupa pdf dan ukuran maksimal 5 MB');
           return redirect()->to(base_url('/list_users'));
         }
 
@@ -107,8 +114,18 @@ class Users extends BaseController
           $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
           $file_name = preg_replace('/\s+/', '_', $file_name);
           $file_name = $file_name . '_' . $file->getRandomName();
-          $file->move(ROOTPATH . 'public/uploads/images/', $file_name);
-          unlink(ROOTPATH . 'public/uploads/images/' . $this->request->getPost('file_lama'));
+          try {
+            $img = \Config\Services::image()
+                ->withFile($file)
+                ->resize(128, 128, true, 'heigth')
+                ->save(ROOTPATH . 'public/uploads/images/'. $file_name);
+          } catch (\Exception $e) {
+            $file->move(ROOTPATH . 'public/uploads/images/', $file_name);
+          }
+          try {
+            unlink(ROOTPATH . 'public/uploads/images/' . $this->request->getPost('file_lama'));
+          } catch (\Exception $e) {
+          }
         }
         
         $passwd = $this->request->getPost('password');
@@ -153,7 +170,7 @@ class Users extends BaseController
             ]
           ]
         ])) {
-          session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+          session()->setFlashdata('error', 'Gagal Menyimpan! File extention harus berupa pdf dan ukuran maksimal 5 MB');
           return redirect()->to(base_url('/list_users'));
         }
 
@@ -164,8 +181,18 @@ class Users extends BaseController
           $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
           $file_name = preg_replace('/\s+/', '_', $file_name);
           $file_name = $file_name . '_' . $file->getRandomName();
-          $file->move(ROOTPATH . 'public/uploads/images/', $file_name);
-          unlink(ROOTPATH . 'public/uploads/images/' . $this->request->getPost('file_lama'));
+          try {
+            $img = \Config\Services::image()
+                ->withFile($file)
+                ->resize(128, 128, true, 'heigth')
+                ->save(ROOTPATH . 'public/uploads/images/'. $file_name);
+          } catch (\Exception $e) {
+            $file->move(ROOTPATH . 'public/uploads/images/', $file_name);
+          }
+          try {
+            unlink(ROOTPATH . 'public/uploads/images/' . $this->request->getPost('file_lama'));
+          } catch (\Exception $e) {
+          }
         }
         
         $passwd = $this->request->getPost('password');
@@ -197,13 +224,14 @@ class Users extends BaseController
 
     public function delete_users($id_user)
     {
-        unlink(ROOTPATH . 'public/uploads/images/' . $this->request->getPost('file'));
-        $success = $this->usersModel->delete_users($id_user);
-        if ($success){
+        try {
+            unlink(ROOTPATH . 'public/uploads/images/' . $this->request->getPost('file'));
+            $this->usersModel->delete_users($id_user);
             session()->setFlashdata('success', 'Data Berhasil Dihapus');
             return redirect()->to(base_url('/list_users'));
-          } else {
-            session()->setFlashdata('error', 'Data Gagal Dihapus');
+        } catch (\Exception $e) {
+            $this->usersModel->delete_users($id_user);
+            session()->setFlashdata('success', 'Data Berhasil Dihapus');
             return redirect()->to(base_url('/list_users'));
           }
     }

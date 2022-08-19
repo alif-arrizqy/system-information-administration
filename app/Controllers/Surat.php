@@ -25,7 +25,6 @@ class Surat extends BaseController
         $file_path = $file['file'];
       }
       try {
-        echo $file_path;
         return $this->response->download('public/uploads/surat/' . $file_path, null);
       } catch (\Exception $e) {
         session()->setFlashdata('error', 'Data Tidak Ditemukan');
@@ -53,7 +52,7 @@ class Surat extends BaseController
     
         ]
         ])) {
-        session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+        session()->setFlashdata('error', 'Gagal Menyimpan! File extention harus berupa pdf dan ukuran maksimal 5 MB');
         return redirect()->to(base_url('/submit_surat'));
         }
 
@@ -133,13 +132,14 @@ class Surat extends BaseController
     
     public function delete_surat($id_surat)
     {
-        unlink(ROOTPATH . 'public/uploads/surat/' . $this->request->getPost('file'));
-        $success = $this->suratModel->delete_surat($id_surat);
-        if ($success){
+        try {
+            unlink(ROOTPATH . 'public/uploads/surat/' . $this->request->getPost('file'));
+            $this->suratModel->delete_surat($id_surat);
             session()->setFlashdata('success', 'Data Berhasil Dihapus');
             return redirect()->to(base_url('/list_surat_keluar'));
-        } else {
-            session()->setFlashdata('error', 'Data Gagal Dihapus');
+        } catch (\Exception $e) {
+            $this->suratModel->delete_surat($id_surat);
+            session()->setFlashdata('success', 'Data Berhasil Dihapus');
             return redirect()->to(base_url('/list_surat_keluar'));
         }
     }

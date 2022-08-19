@@ -33,6 +33,13 @@
             }
         }
         ?>
+        <!-- alert -->
+        <?php if (session()->getFlashdata('success')) { ?>
+            <div class="swal" data-swal="<?= session()->getFlashdata('success') ?>"></div>
+        <?php } ?>
+        <?php if (session()->getFlashdata('error')) { ?>
+            <div class="swal" data-swal-error="<?= session()->getFlashdata('error') ?>"></div>
+        <?php } ?>
         <div class="col-12 col-lg-12 col-xl-12">
             <div class="box box-widget widget-user">
                 <div class="widget-user-header bg-black" style="background: url(<?= base_url('public/assets/images/bg/bg.jpg') ?>) center center;" alt="background img">

@@ -11,6 +11,7 @@
                         foreach($get_lembaga->getResult() as $rs) {
                             $id_lembaga = $rs->id_lembaga;
                             $nama_lembaga = $rs->nama_lembaga;
+                            $nama_lembaga = str_replace('_', ' ', $nama_lembaga);
                             $tingkat_lembaga = $rs->tingkat_lembaga;
                         }
 

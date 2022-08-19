@@ -25,10 +25,9 @@ class Proposal extends BaseController
         $file_path = $file['file'];
       }
       try{
-        echo $file_path;
         return $this->response->download('public/uploads/proposal/' . $file_path, null);
       } catch (\Exception $e) {
-        session()->setFlashdata('gagal', 'Data Tidak Ditemukan');
+        session()->setFlashdata('error', 'Data Tidak Ditemukan');
         return redirect()->to(base_url('/list_proposal'));
       }
     }
@@ -134,7 +133,7 @@ class Proposal extends BaseController
    
         ]
       ])) {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan:' .$this->validator->listErrors());
+        session()->setFlashdata('error', 'Gagal Menyimpan! File extention harus berupa pdf dan ukuran maksimal 5 MB');
         return redirect()->to(base_url('/list_proposal'));
       }
 
@@ -164,23 +163,24 @@ class Proposal extends BaseController
       ];
       $success = $this->proposalModel->update_proposal($kirimdata);
       if ($success){
-        session()->setFlashdata('sukses', 'Data Berhasil Di Update');
+        session()->setFlashdata('success', 'Data Berhasil Di Update');
         return redirect()->to(base_url('/list_proposal'));
       } else {
-        session()->setFlashdata('gagal', 'Data Gagal Di Update');
+        session()->setFlashdata('error', 'Data Gagal Di Update');
         return redirect()->to(base_url('/list_proposal'));
       }
     }
 
     public function delete_proposal($id_proposal)
     {
-      unlink(ROOTPATH . 'public/uploads/proposal/' . $this->request->getPost('file'));
-      $success = $this->proposalModel->delete_proposal($id_proposal);
-      if ($success){
-        session()->setFlashdata('sukses', 'Data Berhasil Dihapus');
+      try {
+        unlink(ROOTPATH . 'public/uploads/proposal/' . $this->request->getPost('file'));
+        $this->proposalModel->delete_proposal($id_proposal);
+        session()->setFlashdata('success', 'Data Berhasil Dihapus');
         return redirect()->to(base_url('/list_proposal'));
-      } else {
-        session()->setFlashdata('gagal', 'Data Gagal Dihapus');
+    } catch (\Exception $e) {
+        $this->proposalModel->delete_proposal($id_proposal);
+        session()->setFlashdata('success', 'Data Berhasil Dihapus');
         return redirect()->to(base_url('/list_proposal'));
       }
     }
@@ -209,10 +209,10 @@ class Proposal extends BaseController
 
       $success = $this->proposalModel->update_approval($status, $anggaran_diberikan, $id_proposal);
       if ($success){
-        session()->setFlashdata('sukses', 'Data Berhasil Disimpan');
+        session()->setFlashdata('success', 'Data Berhasil Disimpan');
         return redirect()->to(base_url('/approve_proposal'));
       } else {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan');
+        session()->setFlashdata('error', 'Data Gagal Disimpan');
         return redirect()->to(base_url('/approve_proposal'));
       }
     }

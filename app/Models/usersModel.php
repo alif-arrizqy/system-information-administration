@@ -14,6 +14,13 @@ class usersModel extends Model
         return $query;
     }
 
+    public function get_info_users()
+    {
+        $id = session()->get('id_user');
+        $query = $this->db->query("SELECT * FROM users WHERE id_user = '$id'")->getResultArray();
+        return $query;
+    }
+
     public function get_all_lembaga()
     {
         return $this->db->query("SELECT id_lembaga, nama_lembaga FROM lembaga")->getResultArray();
@@ -35,6 +42,11 @@ class usersModel extends Model
     }
 
     public function update_users($kirimdata, $id_user)
+    {
+        return $this->db->table('users')->update($kirimdata, array('id_user' => $id_user));
+    }
+
+    public function update_profile($kirimdata, $id_user)
     {
         return $this->db->table('users')->update($kirimdata, array('id_user' => $id_user));
     }

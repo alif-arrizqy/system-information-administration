@@ -2,6 +2,7 @@
     foreach($get_lembaga->getResult() as $rs) {
         $id_lembaga = $rs->id_lembaga;
         $nama_lembaga = $rs->nama_lembaga;
+        $nama_lembaga = str_replace('_', ' ', $nama_lembaga);
         $tingkat_lembaga = $rs->tingkat_lembaga;
     }
     $id_user = session()->get('id_user');
@@ -36,6 +37,7 @@
             <div class="info">
                 <a class="dropdown-toggle px-20" data-toggle="dropdown" href="#"><?= $nama_lembaga?></a>
                 <div class="dropdown-menu">
+					  <a class="dropdown-item" href="<?= base_url('/view_users') ?>"><i class="ti-user"></i> Profile</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?= base_url('login/logout') ?>"><i class="ti-shift-right"></i> Logout</a>
                 </div>

@@ -73,6 +73,7 @@ $routes->get('/approve_dana_subsidi', 'DanaSubsidi::approve_dana_subsidi', ['fil
 
 // manajemen user
 $routes->get('/list_users', 'Users::list_users', ['filter' => 'auth']);
+$routes->get('/view_users', 'Users::view_users', ['filter' => 'auth']);
 $routes->get('/submit_users', 'Users::submit_users', ['filter' => 'auth']);
 
 

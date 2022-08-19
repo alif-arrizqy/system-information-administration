@@ -17,6 +17,13 @@ class Users extends BaseController
         helper('form');
     }
 
+    public function view_users()
+    {
+        $data['get_lembaga'] = $this->usersModel->get_info_login_lembaga();
+        $data['get_profile'] = $this->usersModel->get_info_users();
+        return view('pages/manajemen_user/view_users', $data);
+    }
+
     public function list_users()
     {
         $data['get_lembaga'] = $this->usersModel->get_info_login_lembaga();
@@ -132,6 +139,59 @@ class Users extends BaseController
           } else {
             session()->setFlashdata('error', 'Data Gagal Diubah');
             return redirect()->to(base_url('/list_users'));
+          }
+    }
+
+    public function update_profile($id_user)
+    {
+        if (!$this->validate([
+          'file' => [
+            'rules' => 'mime_in[file,image/jpg,image/jpeg,image/png]|max_size[file,5048]',
+            'errors' => [
+              'mime_in' => 'File Extention Harus Berupa jpg/jpeg/png',
+              'max_size' => 'Ukuran File Maksimal 5 MB'
+            ]
+          ]
+        ])) {
+          session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+          return redirect()->to(base_url('/list_users'));
+        }
+
+        $file = $this->request->getfile('file');
+        if ($file->getError() == 4) {
+          $file_name = $this->request->getPost('file_lama');
+        } else {
+          $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
+          $file_name = preg_replace('/\s+/', '_', $file_name);
+          $file_name = $file_name . '_' . $file->getRandomName();
+          $file->move(ROOTPATH . 'public/uploads/images/', $file_name);
+          unlink(ROOTPATH . 'public/uploads/images/' . $this->request->getPost('file_lama'));
+        }
+        
+        $passwd = $this->request->getPost('password');
+        if ($passwd == '') {
+          $kirimdata = [
+            'fullname' => $this->request->getPost('fullname'),
+            'username' => $this->request->getPost('username'),
+            'foto' => $file_name
+          ];
+        } else {
+          $passwd = md5($this->request->getPost('password'));
+          $kirimdata = [
+            'fullname' => $this->request->getPost('fullname'),
+            'username' => $this->request->getPost('username'),
+            'password' => $passwd,
+            'foto' => $file_name
+          ];
+        }
+
+        $success = $this->usersModel->update_profile($kirimdata, $id_user);
+        if ($success){
+            session()->setFlashdata('success', 'Data Berhasil Diubah');
+            return redirect()->to(base_url('/view_users'));
+          } else {
+            session()->setFlashdata('error', 'Data Gagal Diubah');
+            return redirect()->to(base_url('/view_users'));
           }
     }
 

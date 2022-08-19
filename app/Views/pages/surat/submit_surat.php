@@ -16,6 +16,11 @@
                     $tingkat_lembaga = $rs->tingkat_lembaga;
                 }
                 ?>
+                <!-- alert -->
+				<?php if (session()->getFlashdata('error')) { ?>
+                    <div class="swal" data-swal-error="<?= session()->getFlashdata('error') ?>"></div>
+				<?php } ?>
+                
                 <form novalidate class="form" action="<?= base_url('/Surat/save_surat') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="box-body">

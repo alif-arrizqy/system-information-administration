@@ -45,14 +45,17 @@ class Users extends BaseController
     
           ]
         ])) {
-          session()->setFlashdata('gagal', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+          session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
           return redirect()->to(base_url('/submit_users'));
         }
 
         $id_lembaga = $this->request->getPost('id_lembaga');
         $passwd = md5($this->request->getPost('password'));
-        $file = $this->request->getfile('file');
-        $file_name = $file->getRandomName();
+
+        $file = $this->request->getFile('file');
+        $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
+        $file_name = preg_replace('/\s+/', '_', $file_name);
+        $file_name = $file_name . '_' . $file->getRandomName();
         $file->move(ROOTPATH . 'public/uploads/images/', $file_name);
 
         $kirimdata = [
@@ -66,7 +69,7 @@ class Users extends BaseController
 
         $check_duplicate = $this->usersModel->check_lembaga($id_lembaga);
         if ($check_duplicate) {
-            session()->setFlashdata('gagal', 'Data Gagal Disimpan: Lembaga Sudah Memiliki User');
+            session()->setFlashdata('error', 'Data Gagal Disimpan: Lembaga Sudah Memiliki User');
             return redirect()->to(base_url('/submit_users'));
         } else {
             $this->usersModel->save_users($kirimdata);
@@ -86,7 +89,7 @@ class Users extends BaseController
             ]
           ]
         ])) {
-          session()->setFlashdata('gagal', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+          session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
           return redirect()->to(base_url('/list_users'));
         }
 
@@ -94,10 +97,13 @@ class Users extends BaseController
         if ($file->getError() == 4) {
           $file_name = $this->request->getPost('file_lama');
         } else {
-          $file_name = $file->getRandomName();
+          $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
+          $file_name = preg_replace('/\s+/', '_', $file_name);
+          $file_name = $file_name . '_' . $file->getRandomName();
           $file->move(ROOTPATH . 'public/uploads/images/', $file_name);
           unlink(ROOTPATH . 'public/uploads/images/' . $this->request->getPost('file_lama'));
         }
+        
         $passwd = $this->request->getPost('password');
         if ($passwd == '') {
           $kirimdata = [
@@ -121,10 +127,10 @@ class Users extends BaseController
 
         $success = $this->usersModel->update_users($kirimdata, $id_user);
         if ($success){
-            session()->setFlashdata('sukses', 'Data Berhasil Diubah');
+            session()->setFlashdata('success', 'Data Berhasil Diubah');
             return redirect()->to(base_url('/list_users'));
           } else {
-            session()->setFlashdata('gagal', 'Data Gagal Diubah');
+            session()->setFlashdata('error', 'Data Gagal Diubah');
             return redirect()->to(base_url('/list_users'));
           }
     }
@@ -134,10 +140,10 @@ class Users extends BaseController
         unlink(ROOTPATH . 'public/uploads/images/' . $this->request->getPost('file'));
         $success = $this->usersModel->delete_users($id_user);
         if ($success){
-            session()->setFlashdata('sukses', 'Data Berhasil Dihapus');
+            session()->setFlashdata('success', 'Data Berhasil Dihapus');
             return redirect()->to(base_url('/list_users'));
           } else {
-            session()->setFlashdata('gagal', 'Data Gagal Dihapus');
+            session()->setFlashdata('error', 'Data Gagal Dihapus');
             return redirect()->to(base_url('/list_users'));
           }
     }

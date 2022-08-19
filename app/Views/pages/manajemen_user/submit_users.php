@@ -15,6 +15,10 @@
                 <div class="box-header with-border">
                     <h4 class="box-title text-info"><i class="ti-user mr-15"></i> New Users</h4>
                 </div>
+                <!-- alert -->
+				<?php if (session()->getFlashdata('error')) { ?>
+                    <div class="swal" data-swal-error="<?= session()->getFlashdata('error') ?>"></div>
+				<?php } ?>
                 <form novalidate class="form" action="<?= base_url('/Users/save_users') ?>" method="post" enctype="multipart/form-data">
                     <?= csrf_field(); ?>
                     <div class="box-body">

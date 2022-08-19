@@ -43,11 +43,11 @@ class Login extends BaseController
 				$session->set($ses_data);
 				return redirect()->to(base_url('Home'));
 			} else {
-				$session->setFlashdata('gagal', 'Password Kamu Salah');
+				$session->setFlashdata('error', 'Password Kamu Salah');
 				return redirect()->to('Login');
 			}
 		} else {
-			$session->setFlashdata('gagal', 'Username Kamu Salah');
+			$session->setFlashdata('error', 'Username Kamu Salah');
 			return redirect()->to('Login');
 		}
 	}
@@ -56,7 +56,7 @@ class Login extends BaseController
 	{
 		$session = session();
 		$session->destroy();
-		session()->setFlashdata('sukses', 'Anda telah berhasil logout');
+		session()->setFlashdata('success', 'Anda telah berhasil logout');
 		return redirect()->to(base_url('Login'));
 	}
 }

@@ -6,19 +6,12 @@
 		<div class="col-lg-12 col-12">
 			<div class="box">
 				<!-- alert -->
-				<?php if (!empty(session()->getFlashdata('sukses'))) { ?>
-					<div class="alert alert-success">
-						<?php echo session()->getFlashdata('sukses') ?>
-					</div>
+				<?php if (session()->getFlashdata('success')) { ?>
+					<div class="swal" data-swal="<?= session()->getFlashdata('success') ?>"></div>
 				<?php } ?>
-				<?php if (!empty(session()->getFlashdata('gagal'))) { ?>
-					<div class="alert alert-danger">
-						<?php echo session()->getFlashdata('gagal') ?>
-					</div>
+				<?php if (session()->getFlashdata('error')) { ?>
+					<div class="swal" data-swal-error="<?= session()->getFlashdata('error') ?>"></div>
 				<?php } ?>
-				<div class="box-header with-border">
-					<h3 class="box-title">Data Admin</h3>
-				</div>
 				<!-- /.box-header -->
 				<div class="box-body">
 					<div class="table-responsive">

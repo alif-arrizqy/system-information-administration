@@ -11,15 +11,11 @@
                 </div>
                 <div class="p-40">
                     <!-- alert -->
-                    <?php if (!empty(session()->getFlashdata('gagal'))) { ?>
-                        <div class="alert alert-warning">
-                            <?php echo session()->getFlashdata('gagal') ?>
-                        </div>
+                    <?php if (session()->getFlashdata('success')) { ?>
+                        <div class="swal" data-swal="<?= session()->getFlashdata('success') ?>"></div>
                     <?php } ?>
-                    <?php if (!empty(session()->getFlashdata('sukses'))) { ?>
-                        <div class="alert alert-success">
-                            <?php echo session()->getFlashdata('sukses') ?>
-                        </div>
+                    <?php if (session()->getFlashdata('error')) { ?>
+                        <div class="swal" data-swal-error="<?= session()->getFlashdata('error') ?>"></div>
                     <?php } ?>
                     <form action="<?= base_url('Login/cek_login') ?>" method="post">
                         <div class="form-group">

@@ -78,11 +78,15 @@ class Proposal extends BaseController
       $judul = $this->request->getPost('judul');
       $anggaran = $this->request->getPost('pengajuan_anggaran');
       $pengajuan_anggaran = str_replace(",", "", $anggaran);
-      $file = $this->request->getfile('file');
-      $file_name = $file->getRandomName();
+      
+      $file = $this->request->getFile('file');
+      $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
+      $file_name = preg_replace('/\s+/', '_', $file_name);
+      $file_name = $file_name . '_' . $file->getRandomName();
+      $file->move(ROOTPATH . 'public/uploads/proposal/', $file_name);
+
       $status = 0;
       $created_at = date('Y-m-d H:i:s');
-      $file->move(ROOTPATH . 'public/uploads/proposal/', $file_name);
       
       $kirimdata = [
         'id_lembaga' => $id_lembaga,
@@ -138,7 +142,9 @@ class Proposal extends BaseController
       if ($file->getError() == 4) {
         $file_name = $this->request->getPost('file_lama');
       } else {
-        $file_name = $file->getRandomName();
+        $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
+        $file_name = preg_replace('/\s+/', '_', $file_name);
+        $file_name = $file_name . '_' . $file->getRandomName();
         $file->move(ROOTPATH . 'public/uploads/proposal/', $file_name);
         unlink(ROOTPATH . 'public/uploads/proposal/' . $this->request->getPost('file_lama'));
       }

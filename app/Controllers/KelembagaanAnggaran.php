@@ -80,10 +80,10 @@ class KelembagaanAnggaran extends BaseController
         
         $success = $this->kelembagaanAnggaranModel->add_anggaran($kirimdata);
         if ($success){
-            session()->setFlashdata('sukses', 'Data Berhasil Disimpan');
+            session()->setFlashdata('success', 'Data Berhasil Disimpan');
             return redirect()->to(base_url('/list_lembaga/'.$jenis_lembaga));
         } else {
-            session()->setFlashdata('gagal', 'Data Gagal Disimpan');
+            session()->setFlashdata('error', 'Data Gagal Disimpan');
             return redirect()->to(base_url('/list_lembaga/'.$jenis_lembaga));
         }
     }
@@ -123,10 +123,10 @@ class KelembagaanAnggaran extends BaseController
         $success = $this->kelembagaanAnggaranModel->save_lembaga($kirimdata);
         
         if ($success){
-            session()->setFlashdata('sukses', 'Data Berhasil Disimpan');
+            session()->setFlashdata('success', 'Data Berhasil Disimpan');
             return redirect()->to(base_url('/submit_lembaga/'.$jenis_lembaga));
         } else {
-            session()->setFlashdata('gagal', 'Data Gagal Disimpan');
+            session()->setFlashdata('error', 'Data Gagal Disimpan');
             return redirect()->to(base_url('/submit_lembaga/'.$jenis_lembaga));
         }
     }
@@ -155,10 +155,10 @@ class KelembagaanAnggaran extends BaseController
 
         $success = $this->kelembagaanAnggaranModel->update_lembaga($kirimdata);
         if ($success){
-            session()->setFlashdata('sukses', 'Data Berhasil Disimpan');
+            session()->setFlashdata('success', 'Data Berhasil Disimpan');
             return redirect()->to(base_url('/list_lembaga/'.$jenis_lembaga));
         } else {
-            session()->setFlashdata('gagal', 'Data Gagal Disimpan');
+            session()->setFlashdata('error', 'Data Gagal Disimpan');
             return redirect()->to(base_url('/list_lembaga/'.$jenis_lembaga));
         }
     }
@@ -178,10 +178,10 @@ class KelembagaanAnggaran extends BaseController
 
         $success = $this->kelembagaanAnggaranModel->delete_lembaga($id_lembaga);
         if ($success){
-            session()->setFlashdata('sukses', 'Data Berhasil Dihapus');
+            session()->setFlashdata('success', 'Data Berhasil Dihapus');
             return redirect()->to(base_url('/list_lembaga/'.$jenis_lembaga));
         } else {
-            session()->setFlashdata('gagal', 'Data Gagal Dihapus');
+            session()->setFlashdata('error', 'Data Gagal Dihapus');
             return redirect()->to(base_url('/list_lembaga/'.$jenis_lembaga));
         }
     }

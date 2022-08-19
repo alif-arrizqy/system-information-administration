@@ -28,7 +28,7 @@ class LaporanKegiatan extends BaseController
         echo $file_path;
         return $this->response->download('public/uploads/laporan_hasil_kegiatan/' . $file_path, null);
       } catch (\Exception $e) {
-          session()->setFlashdata('gagal', 'Data Tidak Ditemukan');
+          session()->setFlashdata('error', 'Data Tidak Ditemukan');
           return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
       }
     }
@@ -65,7 +65,7 @@ class LaporanKegiatan extends BaseController
    
         ]
       ])) {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+        session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
         return redirect()->to(base_url('/submit_laporan_hasil_kegiatan'));
       }
 
@@ -73,9 +73,12 @@ class LaporanKegiatan extends BaseController
       $id_lembaga = $this->request->getPost('id_lembaga');
       $anggaran = $this->request->getPost('realisasi_anggaran');
       $realisasi_anggaran = str_replace(",", "", $anggaran);
-      $file = $this->request->getfile('file');
-      $file_name = $file->getRandomName();
       $created_at = date('Y-m-d H:i:s');
+
+      $file = $this->request->getfile('file');
+      $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
+      $file_name = preg_replace('/\s+/', '_', $file_name);
+      $file_name = $file_name . '_' . $file->getRandomName();
       $file->move(ROOTPATH . 'public/uploads/laporan_hasil_kegiatan/', $file_name);
 
       $kirimdata = [
@@ -88,10 +91,10 @@ class LaporanKegiatan extends BaseController
 
       $success = $this->laporanKegiatanModel->save_laporan_hasil_kegiatan($kirimdata);
       if ($success){
-        session()->setFlashdata('sukses', 'Data Berhasil Disimpan');
+        session()->setFlashdata('success', 'Data Berhasil Disimpan');
         return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
       } else {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan');
+        session()->setFlashdata('error', 'Data Gagal Disimpan');
         return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
       }
     }
@@ -101,10 +104,10 @@ class LaporanKegiatan extends BaseController
       unlink(ROOTPATH . 'public/uploads/laporan_hasil_kegiatan/' . $this->request->getPost('file'));
       $success = $this->laporanKegiatanModel->delete_laporan_keg($id_laporan_keg);
       if ($success){
-        session()->setFlashdata('sukses', 'Data Berhasil Dihapus');
+        session()->setFlashdata('success', 'Data Berhasil Dihapus');
           return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
       } else {
-        session()->setFlashdata('gagal', 'Data Gagal Dihapus');
+        session()->setFlashdata('error', 'Data Gagal Dihapus');
         return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
       }
     }
@@ -121,7 +124,7 @@ class LaporanKegiatan extends BaseController
    
         ]
       ])) {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+        session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
         return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
       }
 
@@ -129,7 +132,9 @@ class LaporanKegiatan extends BaseController
       if ($file->getError() == 4) {
         $file_name = $this->request->getPost('file_lama');
       } else {
-        $file_name = $file->getRandomName();
+        $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
+        $file_name = preg_replace('/\s+/', '_', $file_name);
+        $file_name = $file_name . '_' . $file->getRandomName();
         $file->move(ROOTPATH . 'public/uploads/laporan_hasil_kegiatan/', $file_name);
         unlink(ROOTPATH . 'public/uploads/laporan_hasil_kegiatan/' . $this->request->getPost('file_lama'));
       }
@@ -147,10 +152,10 @@ class LaporanKegiatan extends BaseController
       $success = $this->laporanKegiatanModel->update_laporan_keg($kirimdata);
       // $success = $this->laporanKegiatanModel->update_laporan_keg($id_laporan_keg, $realisasi_anggaran, $file_name);
       if ($success){
-        session()->setFlashdata('sukses', 'Data Berhasil Di Update');
+        session()->setFlashdata('success', 'Data Berhasil Di Update');
         return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
       } else {
-        session()->setFlashdata('gagal', 'Data Gagal Di Update');
+        session()->setFlashdata('error', 'Data Gagal Di Update');
         return redirect()->to(base_url('/list_laporan_hasil_kegiatan'));
       }
     }

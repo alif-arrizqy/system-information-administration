@@ -12,10 +12,8 @@
                     <div class="row">
                         <div class="col-md-6">
                             <!-- alert -->
-                            <?php if (!empty(session()->getFlashdata('gagal'))) { ?>
-                                <div class="alert alert-danger">
-                                    <?php echo session()->getFlashdata('gagal') ?>
-                                </div>
+                            <?php if (session()->getFlashdata('error')) { ?>
+                                <div class="swal" data-swal-error="<?= session()->getFlashdata('error') ?>"></div>
                             <?php } ?>
                             <form class="form" action="<?= base_url('/LaporanKegiatan/submit_laporan_hasil_kegiatan') ?>" method="post">
                             <?= csrf_field(); ?>

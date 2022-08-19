@@ -9,15 +9,11 @@
 					<h3 class="box-title">Data Surat Keluar</h3>
 				</div>
 				<!-- alert -->
-				<?php if (!empty(session()->getFlashdata('sukses'))) { ?>
-					<div class="alert alert-success">
-						<?php echo session()->getFlashdata('sukses') ?>
-					</div>
+				<?php if (session()->getFlashdata('success')) { ?>
+					<div class="swal" data-swal="<?= session()->getFlashdata('success') ?>"></div>
 				<?php } ?>
-				<?php if (!empty(session()->getFlashdata('gagal'))) { ?>
-					<div class="alert alert-danger">
-						<?php echo session()->getFlashdata('gagal') ?>
-					</div>
+				<?php if (session()->getFlashdata('error')) { ?>
+					<div class="swal" data-swal-error="<?= session()->getFlashdata('error') ?>"></div>
 				<?php } ?>
 				<!-- /.box-header -->
 				<div class="box-body">

@@ -28,7 +28,7 @@ class Surat extends BaseController
         echo $file_path;
         return $this->response->download('public/uploads/surat/' . $file_path, null);
       } catch (\Exception $e) {
-        session()->setFlashdata('gagal', 'Data Tidak Ditemukan');
+        session()->setFlashdata('error', 'Data Tidak Ditemukan');
         return redirect()->to(base_url('/list_surat_masuk'));
       }
     }
@@ -53,7 +53,7 @@ class Surat extends BaseController
     
         ]
         ])) {
-        session()->setFlashdata('gagal', 'Data Gagal Disimpan: '.$this->validator->listErrors());
+        session()->setFlashdata('error', 'Data Gagal Disimpan: '.$this->validator->listErrors());
         return redirect()->to(base_url('/submit_surat'));
         }
 
@@ -69,11 +69,14 @@ class Surat extends BaseController
             $lembaga_disposisi = NULL;
         }
 
-        $file = $this->request->getfile('file');
-        $file_name = $file->getRandomName();
+        $file = $this->request->getFile('file');
+        $file_name = pathinfo($file->getName(), PATHINFO_FILENAME);
+        $file_name = preg_replace('/\s+/', '_', $file_name);
+        $file_name = $file_name . '_' . $file->getRandomName();
+        $file->move(ROOTPATH . 'public/uploads/surat/', $file_name);
+
         $status = 0;
         $created_at = date('Y-m-d H:i:s');
-        $file->move(ROOTPATH . 'public/uploads/surat/', $file_name);
         
         $kirimdata = [
         'id_lembaga' => $this->request->getPost('id_lembaga'),
@@ -94,10 +97,10 @@ class Surat extends BaseController
         
         try {
             $this->suratModel->save_surat($kirimdata);
-            session()->setFlashdata('sukses', 'Data Berhasil Disimpan');
+            session()->setFlashdata('success', 'Data Berhasil Disimpan');
             return redirect()->to(base_url('/list_surat_keluar'));
         } catch (\Throwable $th) {
-            session()->setFlashdata('gagal', 'Data Gagal Disimpan');
+            session()->setFlashdata('error', 'Data Gagal Disimpan');
             return redirect()->to(base_url('/list_surat_keluar'));
         }
     }
@@ -120,10 +123,10 @@ class Surat extends BaseController
     {
         $success = $this->suratModel->status_baca($id_surat);
         if ($success){
-            session()->setFlashdata('sukses', 'Status Baca Berhasil Diubah');
+            session()->setFlashdata('success', 'Status Baca Berhasil Diubah');
             return redirect()->to(base_url('/list_surat_masuk'));
         } else {
-            session()->setFlashdata('gagal', 'Data Gagal Disimpan');
+            session()->setFlashdata('error', 'Data Gagal Disimpan');
             return redirect()->to(base_url('/list_surat_masuk'));
         }
     }
@@ -133,10 +136,10 @@ class Surat extends BaseController
         unlink(ROOTPATH . 'public/uploads/surat/' . $this->request->getPost('file'));
         $success = $this->suratModel->delete_surat($id_surat);
         if ($success){
-            session()->setFlashdata('sukses', 'Data Berhasil Dihapus');
+            session()->setFlashdata('success', 'Data Berhasil Dihapus');
             return redirect()->to(base_url('/list_surat_keluar'));
         } else {
-            session()->setFlashdata('gagal', 'Data Gagal Dihapus');
+            session()->setFlashdata('error', 'Data Gagal Dihapus');
             return redirect()->to(base_url('/list_surat_keluar'));
         }
     }

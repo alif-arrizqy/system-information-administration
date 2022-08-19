@@ -1,0 +1,150 @@
+<?= $this->extend('./layout/template'); ?>
+<?= $this->section('content'); ?>
+
+<section class="content">
+	<div class="row">
+		<div class="col-lg-12 col-12">
+			<div class="box">
+				<!-- alert -->
+				<?php if (!empty(session()->getFlashdata('sukses'))) { ?>
+					<div class="alert alert-success">
+						<?php echo session()->getFlashdata('sukses') ?>
+					</div>
+				<?php } ?>
+				<?php if (!empty(session()->getFlashdata('gagal'))) { ?>
+					<div class="alert alert-danger">
+						<?php echo session()->getFlashdata('gagal') ?>
+					</div>
+				<?php } ?>
+				<div class="box-header with-border">
+					<h3 class="box-title">Data Pengajuan Proposal</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="table-responsive">
+						<table id="example1" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+							<thead>
+								<tr>
+									<th><center>No</center></th>
+									<th><center>Judul Kegiatan</center></th>
+									<th><center>Instansi</center></th>
+									<th><center>Pengajuan Anggaran</center></th>
+									<th><center>Anggaran Approval</center></th>
+									<th><center>File</center></th>
+									<th><center>Status</center></th>
+									<?php if (session()->get('status') == 0 or session()->get('status') == 2) { ?>
+										<th><center>Action</center></th>
+									<?php } ?>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								$no = 1;
+								foreach($list_approval as $rs){
+									if ($rs['status'] == 0){
+										$approve = "<span class='label label-warning'>Pending</span>";
+									} else if ($rs['status'] == 1){
+										$approve = "<span class='label label-success'>Approved</span>";
+									} else if ($rs['status'] == 2){
+										$approve = "<span class='label label-danger'>Rejected</span>";
+									}
+								$db = \Config\Database::connect();
+								$query = $db->query("SELECT nama_lembaga FROM lembaga WHERE id_lembaga = '$rs[id_lembaga]'");
+								foreach($query->getResultArray() as $qr) {
+									$nama_lembaga = $qr['nama_lembaga'];
+								}
+								?>
+								<tr>
+									<td><center><?=$no++?></center></td>
+									<td><center><?= $rs['judul_kegiatan'] ?></center></td>
+									<td><center><?= $nama_lembaga ?></center></td>
+									<td><center>Rp<?= number_format($rs['pengajuan_anggaran']) ?></center></td>
+									<td><center>Rp<?= number_format($rs['anggaran_diterima']) ?></center></td>
+									<td><center>
+										<a href="<?= base_url('DanaSubsidi/download_subsidi/'.$rs['id_subsidi']) ?>">
+											<img src="<?= base_url('public/assets/images/pdf.png') ?>" class="avatar avatar-lg" title="<?= $rs['judul_kegiatan']?>" alt="<?= $rs['file'] ?>">
+										</a>
+									</center></td>
+									<td><center><?= $approve ?></center></td>
+									<?php if (session()->get('status') == 0 or session()->get('status') == 2) { ?>
+									<td>
+										<center>
+											<button type="button" class="btn btn-primary" title="Approve Data" data-toggle="modal" data-target="#approveModal<?= $rs['id_subsidi'] ?>">
+                                                <i class="fa fa-receipt"></i>
+											</button>
+										</center>
+									</td>
+									<?php } ?>
+								</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
+		</div>
+	</div>
+</section>
+
+<!-- Modal Approve -->
+<?php foreach($list_approval as $rs) { ?>
+	<div class="modal fade" id="approveModal<?=$rs['id_subsidi']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Approve Proposal</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form novalidate class="form" action="<?= base_url('/DanaSubsidi/update_approval') ?>" method="post" enctype="multipart/form-data">
+				<?= csrf_field(); ?>
+				<div class="modal-body">
+					<div class="box-body">
+						<h4 class="box-title text-info"><i class="ti-book mr-15"></i> Approve Proposal</h4>
+						<hr class="my-15">
+						<div class="form-group">
+							<label>Judul Kegiatan</label>
+							<div class="controls">
+								<input type="text" readonly class="form-control" name="judul" required value="<?= $rs['judul_kegiatan'] ?>">
+								<input type="hidden" class="form-control" name="id_lembaga" value="<?= $rs['id_lembaga']?>">
+								<input type="hidden" class="form-control" name="id_subsidi" value="<?= $rs['id_subsidi']?>">
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Pengajuan Anggaran</label>
+							<div class="controls">
+								<div class="input-group"> <span class="input-group-addon">Rp</span>
+								<input type="text" readonly class="form-control" name="pengajuan_anggaran" required value="<?= number_format($rs['pengajuan_anggaran'])?>">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Anggaran Di Berikan</label>
+							<div class="input-group"> <span class="input-group-addon">Rp</span>
+								<input type="text" class="form-control" name="anggaran_diberikan" onKeyPress="return numbersonly(this, event)" onkeydown="return numbersonly(this, event);" onkeyup="javascript:tandaPemisahTitik(this);">
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Approve Status</label>
+							<select class="form-control select2" name="status" style="width: 100%;">
+							<!-- <option selected="selected">Alabama</option> -->
+								<option value="0">Pending</option>
+								<option value="1">Approve</option>
+								<option value="2">Rejected</option>
+							</select>
+					  	</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+					<button type="submit" class="btn btn-success">Update</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<?php } ?>
+<?= $this->endSection(); ?>

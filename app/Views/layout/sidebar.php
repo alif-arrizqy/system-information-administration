@@ -239,6 +239,25 @@
                 </li>
                 <?php } ?>
 
+                <li class="header">Dana Subsidi </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="icon-File"><span class="path1"></span><span class="path2"></span></i>
+                        <span>Dana Subsidi</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <?php if ($admin or $sub_admin or $guest) { ?>
+                        <li><a href="<?= base_url('/approve_dana_subsidi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Approve Dana Subsidi</a></li>
+                        <?php } else if ($user) { ?>
+                        <li><a href="<?= base_url('/submit_dana_subsidi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Submit Dana Subsidi</a></li>
+                        <li><a href="<?= base_url('/list_dana_subsidi') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Dana Subsidi</a></li>
+                        <?php } ?>
+                    </ul>
+                </li>
+
                 <?php if ($guest || $sub_admin) { ?>
                     <li class="header">Pelaksanaan</li>
                     <?php if ($rektorat) { ?>

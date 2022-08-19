@@ -66,6 +66,11 @@ $routes->get('/detail_realisasi_kegiatan_lembaga/(:segment)', 'Pelaksanaan::real
 $routes->get('/submit_lembaga/(:segment)', 'KelembagaanAnggaran::submit_lembaga/$1', ['filter' => 'auth']);
 $routes->get('/list_lembaga/(:segment)', 'KelembagaanAnggaran::list_lembaga/$1', ['filter' => 'auth']);
 
+// dana subsidi
+$routes->get('/submit_dana_subsidi', 'DanaSubsidi::submit_dana_subsidi', ['filter' => 'auth']);
+$routes->get('/list_dana_subsidi', 'DanaSubsidi::list_dana_subsidi', ['filter' => 'auth']);
+$routes->get('/approve_dana_subsidi', 'DanaSubsidi::approve_dana_subsidi', ['filter' => 'auth']);
+
 // manajemen user
 $routes->get('/list_users', 'Users::list_users', ['filter' => 'auth']);
 $routes->get('/submit_users', 'Users::submit_users', ['filter' => 'auth']);

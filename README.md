@@ -5,8 +5,11 @@
 - Clone this project
 `git clone https://github.com/alif-arrizqy/dirmawa.git`
 
+- Change to Directory dirmawa
+` cd dirmawa`
+
 - Install composser
-`composser install`
+`composer install`
 
 - Open in browser
 ` localhost/dirmawa`

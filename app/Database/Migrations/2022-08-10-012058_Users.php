@@ -38,6 +38,7 @@ class Users extends Migration
             'foto' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
+                'null'       => true,
 			],
         ]);
         $this->forge->addKey('id_user', true);
